@@ -1,5 +1,5 @@
 
-﻿<Window x:Name="MainWindow1" x:Class="RuslanMessager.MainWindow"
+﻿<Window x:Class="RuslanMessager.MainWindow" BorderThickness="0"
 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
