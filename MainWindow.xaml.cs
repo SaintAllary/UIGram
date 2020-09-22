@@ -25,18 +25,18 @@ namespace RuslanMessager
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e) {
-            MainWindow1.Close();
+            //MainWindow1.Close();
         }
 
         private void ButtonHide_Click(object sender, RoutedEventArgs e) {
-            MainWindow1.WindowState = WindowState.Minimized;
+            //MainWindow1.WindowState = WindowState.Minimized;
         }
 
         private void ButtonMaximize_Click(object sender, RoutedEventArgs e) {
-            if (MainWindow1.WindowState == WindowState.Maximized)
-                MainWindow1.WindowState = WindowState.Normal;
-            else
-                MainWindow1.WindowState = WindowState.Maximized;
+            //if (MainWindow1.WindowState == WindowState.Maximized)
+            //    MainWindow1.WindowState = WindowState.Normal;
+            //else
+            //    MainWindow1.WindowState = WindowState.Maximized;
         }
     }
 }
