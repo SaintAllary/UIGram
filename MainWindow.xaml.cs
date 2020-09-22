@@ -20,9 +20,23 @@ namespace RuslanMessager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
+        public MainWindow() {
             InitializeComponent();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) {
+            MainWindow1.Close();
+        }
+
+        private void ButtonHide_Click(object sender, RoutedEventArgs e) {
+            MainWindow1.WindowState = WindowState.Minimized;
+        }
+
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e) {
+            if (MainWindow1.WindowState == WindowState.Maximized)
+                MainWindow1.WindowState = WindowState.Normal;
+            else
+                MainWindow1.WindowState = WindowState.Maximized;
         }
     }
 }
