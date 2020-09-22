@@ -41,7 +41,25 @@
 
 
 
-
+            
         </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Violet" >
+
+                <Grid Height="62">
+                    <Button Background="DarkGray" HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"  Margin="10,10,10,10" Padding="10,6,6,6"
+                            IsEnabled="True" Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBox  Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}" 
+                                  VerticalContentAlignment="Center"
+                                  materialDesign:HintAssist.Hint="Search"
+                                  materialDesign:TransitionAssist.DisableTransitions="True"  FontSize="13" FontStyle="Normal"></TextBox>
+                    </Button>
+                </Grid>
+               
+                
+                
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
