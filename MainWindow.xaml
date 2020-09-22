@@ -56,8 +56,9 @@
                                   materialDesign:TransitionAssist.DisableTransitions="True"  FontSize="13" FontStyle="Normal"></TextBox>
                     </Button>
                 </Grid>
-               
-                
+                <local:UserDialogPreviewButton>
+                    
+                </local:UserDialogPreviewButton>
                 
             </StackPanel>
         </ScrollViewer>
