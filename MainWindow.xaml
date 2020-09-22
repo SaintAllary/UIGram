@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="626" Width="1000"
         MinWidth="501" MinHeight="452">
-    
-    <Grid>
+
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
@@ -19,5 +19,29 @@
             <RowDefinition Height="21"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+
+            <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}">
+                <materialDesign:PackIcon Kind="Menu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="40" Width="24" ></materialDesign:PackIcon>
+            </Button>
+
+            <Button Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}">
+                <StackPanel Width="72"   HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <materialDesign:PackIcon Kind="Chat" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
+                    <Label HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Stretch" FontSize="11" Width="72"  >All chats</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}">
+                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <materialDesign:PackIcon Kind="TuneVariant" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
+                    <Label HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Edit</Label>
+                </StackPanel>
+            </Button>
+
+
+
+
+        </StackPanel>
     </Grid>
 </Window>
