@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
         Title="MainWindow" Height="626" Width="1000"
-        MinWidth="501" MinHeight="452">
-    
-    <Grid>
+        MinWidth="501" MinHeight="452" Background="White">
+
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
