@@ -6,16 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="626" Width="1000">
+        Title="MainWindow" Height="626" Width="1000"
+        MinWidth="501" MinHeight="452">
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
-            <ColumnDefinition MinWidth="475"></ColumnDefinition>
+            <ColumnDefinition MinWidth="380"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="21"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
     </Grid>
