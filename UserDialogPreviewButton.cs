@@ -64,7 +64,7 @@ namespace RuslanMessager
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(62) });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            grid.Children.Add(new Ellipse() { Fill = Brushes.Aquamarine, Margin = new System.Windows.Thickness(8) });// АВАТАРКА
+            grid.Children.Add(new Ellipse() { Fill =new  SolidColorBrush(Color.FromRgb(103,58,183)), Margin = new System.Windows.Thickness(8) });// АВАТАРКА
 
 
 

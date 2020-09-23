@@ -6,9 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="626" Width="1000"
-
-        MinWidth="501" MinHeight="452" Background="White" WindowStyle="ThreeDBorderWindow">
+        Title="MainWindow" Height="626" Width="1000" SizeChanged="MainWindow1_SizeChanged"
+        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
 
     <Window.Resources>
         <ResourceDictionary>
@@ -96,7 +100,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid ShowGridLines="False">
+    <Grid ShowGridLines="False" x:Name="MainWindowGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
@@ -107,19 +111,23 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                <materialDesign:PackIcon Kind="WindowMinimize" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
-            </Button>
-            <Button Width="21" Height="21" Padding="0" Click="ButtonMaximize_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                <materialDesign:PackIcon Kind="WindowMaximize" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
-            </Button>
-            <Button Width="21" Height="21" Padding="0" Click="ButtonClose_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                <materialDesign:PackIcon Kind="Close" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
-            </Button>
-        </StackPanel>
+        <!--<GridSplitter ResizeDirection="Columns" Grid.Column="1" Grid.Row="1" Height="Auto" Width="5" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>-->
 
-        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+        <materialDesign:ColorZone Mode="Standard" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" MouseDown="ColorZone_MouseDown">
+            <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <materialDesign:PackIcon Kind="WindowMinimize" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                </Button>
+                <Button Width="21" Height="21" Padding="0" Click="ButtonMaximize_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <materialDesign:PackIcon Kind="WindowMaximize" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                </Button>
+                <Button Width="21" Height="21" Padding="0" Click="ButtonClose_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <materialDesign:PackIcon Kind="Close" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Background="LightGray">
 
             <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}">
                 <materialDesign:PackIcon Kind="Menu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="40" Width="24" ></materialDesign:PackIcon>
@@ -144,7 +152,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="BlanchedAlmond" >
+            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="WhiteSmoke" >
 
                 <Grid Height="62">
                     <materialDesign:Card Background="DarkGray" HorizontalContentAlignment="Stretch"
@@ -156,11 +164,31 @@
                                   materialDesign:TransitionAssist.DisableTransitions="True"  FontSize="13" FontStyle="Normal"></TextBox>
                     </materialDesign:Card>
                 </Grid>
-             
+
                 <local:UserDialogPreviewButton></local:UserDialogPreviewButton>
                 <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
             </StackPanel>
-    
+
         </ScrollViewer>
 
         <materialDesign:Card Grid.Column="2" Grid.Row="1"
