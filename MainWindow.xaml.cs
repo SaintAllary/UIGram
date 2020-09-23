@@ -38,5 +38,9 @@ namespace RuslanMessager
             else
                 MainWindow1.WindowState = WindowState.Maximized;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+        }
     }
 }
