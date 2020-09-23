@@ -156,34 +156,7 @@
                                   materialDesign:TransitionAssist.DisableTransitions="True"  FontSize="13" FontStyle="Normal"></TextBox>
                     </materialDesign:Card>
                 </Grid>
-                <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Grid Height="62">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Fill="BurlyWood" Margin="8"></Ellipse>
-
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition  Width="75"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label FontWeight="Bold" FontSize="13" Margin="0,6,0,0">Saved Messages.......</Label>
-                        <Label Grid.Row="1" FontFamily="Colibri" FontWeight="DemiBold" Margin="0,2,0,0">Kostor апас</Label>
-                        <StackPanel Grid.Row="0" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Horizontal">
-                            <Label VerticalAlignment="Top">20.20.20</Label>
-                            <materialDesign:PackIcon Kind="CheckAll" VerticalAlignment="Top" Margin="0,4,0,0"></materialDesign:PackIcon>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-                </Button>
-
+             
                 <local:UserDialogPreviewButton></local:UserDialogPreviewButton>
                 <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
             </StackPanel>

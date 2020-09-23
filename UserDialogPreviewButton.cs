@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,15 @@ namespace RuslanMessager
     {
         //public Label MessageNameLabel { get; set; }
 
-        private Label messageNameLabel;
-
-        public Label MessageNameLabel
-        {
-            get { return MessageNameLabel; }
-            set { MessageNameLabel.Content = value; }
-        }
-
+        public Label MessageNamePreviewLabel { get; set; }
+        public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
         public UserDialogPreviewButton()
         {
+            Height = 62;
+
+            #region Main Signature of Dialog
             StringBuilder sb = new StringBuilder();
 
             sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' 
@@ -38,14 +36,16 @@ namespace RuslanMessager
             myButton.Padding = new Thickness(0);
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+            #endregion
 
-                    Height = 62;
+            #region Labels initializing
             //Labels
-            MessageNameLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content= "Empty name" };
-            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content= "Empty Message........" };
-            DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top ,Content="00.00.00"};
-    
+            MessageNamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content = "Empty name" };
+            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content = "Empty Message........" };
+            DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top, Content = "00.00.00" };
+            #endregion
 
+            #region Grids settings
 
             StackPanel innerPanelTime = new StackPanel();
             innerPanelTime.FlowDirection = FlowDirection.RightToLeft;
@@ -69,8 +69,6 @@ namespace RuslanMessager
 
 
             Grid secondGrid = new Grid();
-
-
             Grid.SetRow(TextPreviewLabel, 1);
             Grid.SetColumn(secondGrid, 1);
 
@@ -79,7 +77,7 @@ namespace RuslanMessager
             secondGrid.RowDefinitions.Add(new RowDefinition());
             secondGrid.RowDefinitions.Add(new RowDefinition());
 
-            secondGrid.Children.Add(MessageNameLabel);
+            secondGrid.Children.Add(MessageNamePreviewLabel);
             secondGrid.Children.Add(TextPreviewLabel);
             secondGrid.Children.Add(innerPanelTime);
 
@@ -92,8 +90,17 @@ namespace RuslanMessager
 
 
 
+            #endregion
 
-            //                                                < materialDesign:PackIcon Kind = "CheckAll" VerticalAlignment = "Top" Margin = "0,4,0,0" ></ materialDesign:PackIcon >
+            #region Icon    
+            StatusPreviewIcon = new PackIcon();
+            StatusPreviewIcon.Kind = PackIconKind.CheckAll;
+            StatusPreviewIcon.VerticalAlignment = VerticalAlignment.Top;
+            StatusPreviewIcon.Margin = new Thickness(0, 4, 0, 0);
+            innerPanelTime.Children.Add(StatusPreviewIcon);
+            #endregion
+
+
 
 
 
