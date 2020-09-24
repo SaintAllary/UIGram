@@ -9,10 +9,16 @@ namespace RuslanMessager
 {
     class MessageParent : Card
     {
+        double id { get; set; }
+        string messageText { get; set; }
+        string messageContentUrl { get; set; }
+        string DateTimeToString { get; set; }
+
         MessageParent() {
-            this.Height = 50;
-            this.Width = 50;
-            this.Content = "test msg";
+            id = 0;
+            messageText = "ParentEmptyMessage";
+            messageContentUrl = "ParentEmptyContentUrl";
+            DateTimeToString = "ParentEmptyDateTime";
         }
     }
 }

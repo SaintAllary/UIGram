@@ -39,9 +39,6 @@ namespace RuslanMessager
                 MainWindow1.WindowState = WindowState.Maximized;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-
-        }
 
         private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e) {
             DragMove();

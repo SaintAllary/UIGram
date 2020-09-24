@@ -104,6 +104,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
+            <ColumnDefinition Width="3" MaxWidth="3" MinWidth="3"></ColumnDefinition>
             <ColumnDefinition MinWidth="380"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -113,7 +114,7 @@
 
         <!--<GridSplitter ResizeDirection="Columns" Grid.Column="1" Grid.Row="1" Height="Auto" Width="5" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>-->
 
-        <materialDesign:ColorZone Mode="Standard" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" MouseDown="ColorZone_MouseDown">
+        <materialDesign:ColorZone Mode="Standard" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" MouseDown="ColorZone_MouseDown">
             <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
                     <materialDesign:PackIcon Kind="WindowMinimize" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
@@ -165,7 +166,7 @@
                     </materialDesign:Card>
                 </Grid>
 
-                <local:UserDialogPreviewButton></local:UserDialogPreviewButton>
+                <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
                 <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
                 <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
                 <local:UserDialogPreviewButton ></local:UserDialogPreviewButton>
@@ -191,7 +192,9 @@
 
         </ScrollViewer>
 
-        <materialDesign:Card Grid.Column="2" Grid.Row="1"
+        <GridSplitter Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" ></GridSplitter>
+
+        <materialDesign:Card Grid.Column="3" Grid.Row="1"
             Background="{DynamicResource PrimaryHueDarkBrush}"
             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
             Width="200" Height="30"
