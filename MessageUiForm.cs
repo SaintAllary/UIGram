@@ -15,13 +15,13 @@ namespace RuslanMessager
     {
         FormattedText MessageTextFormatted;
         TextBlock textBlock;
+        Card msgCard;
 
         [Obsolete]
-        public MessageUiForm() : base()
-        {
-            Card msgCard = new Card();
+        public MessageUiForm() : base() {
+            msgCard = new Card();
 
-            MessageText = "SOME TEXT new line aaa AAAAAAABAaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBaaaaaaaaaaaaaaaaaaaaaaaA\n\n\n\n\n\n\naaa";
+            MessageText = "SOME TEXT new line aaa AAAAAAABAaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBaaaaaaaaaaaaaaaaaaaaaaaA\n\n\n\naaa";
             MessageTextFormatted = new FormattedText(MessageText, CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, new Typeface("Calibri"), 12, System.Windows.Media.Brushes.Black);
 
             textBlock = new TextBlock();
@@ -33,7 +33,7 @@ namespace RuslanMessager
             //msgCard.Foreground = System.Windows.Media.Brushes.Red;
             msgCard.Padding = new System.Windows.Thickness(4, 2, 0, 0);
             msgCard.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            msgCard.UniformCornerRadius = 6;
+            msgCard.UniformCornerRadius = 3;
 
             msgCard.FontSize = 12;
             msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");
@@ -44,14 +44,16 @@ namespace RuslanMessager
             ChooseAlignment();
 
             this.AddChild(msgCard);
+            this.Background = Brushes.Transparent;
         }
 
-        private void ChooseAlignment()
-        {
-            if (MyTurn)
-            {
+        private void ChooseAlignment() {
+            if (MyTurn) {
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                msgCard.Background = new SolidColorBrush(Color.FromRgb(239, 253, 222));
             }
+            else
+                msgCard.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         public string MessageContentUrl { get; set; }
@@ -59,6 +61,16 @@ namespace RuslanMessager
         public string SenderName { get; set; }
         public string MessageText { get; set; }
         public bool DoesRead { get; set; }
-        public bool MyTurn { get; set; }
+
+        private bool myTurn;
+
+        public bool MyTurn {
+            get { return myTurn; }
+            set {
+                myTurn = value;
+                ChooseAlignment();
+            }
+        }
+
     }
 }

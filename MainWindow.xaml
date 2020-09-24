@@ -118,60 +118,57 @@
             <Button Command="{Binding RunDialogCommand}" Width="128">RUN CODE </Button>
             <Button Command="{Binding RunExtendedDialogCommand}" Width="128"  Margin="0 32 0 0">EXTENDED</Button>
         </StackPanel>
-        
-        <materialDesign:ColorZone Mode="Standard" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" MouseDown="ColorZone_MouseDown" Loaded="ColorZone_Loaded">
+
+        <materialDesign:ColorZone Mode="Custom" Background="#f1f1f1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" MouseDown="ColorZone_MouseDown" Loaded="ColorZone_Loaded">
 
             <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                    <materialDesign:PackIcon Kind="WindowMinimize" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                    <materialDesign:PackIcon Kind="WindowMinimize" Foreground="#ababab" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
                 <Button Width="21" Height="21" Padding="0" Click="ButtonMaximize_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                    <materialDesign:PackIcon Kind="WindowMaximize" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                    <materialDesign:PackIcon Kind="WindowMaximize" Foreground="#ababab" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
                 <Button Width="21" Height="21" Padding="0" Click="ButtonClose_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
-                    <materialDesign:PackIcon Kind="Close" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                    <materialDesign:PackIcon Kind="Close" Foreground="#ababab" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
             </StackPanel>
         </materialDesign:ColorZone>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Background="LightGray" >
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Background="#293a4c" >
 
-            <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}">
-                <materialDesign:PackIcon Kind="Menu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="40" Width="24" ></materialDesign:PackIcon>
+            <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}" Click="FastAddUserBtn_Click">
+                <materialDesign:PackIcon Kind="Menu" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="40" Width="24" ></materialDesign:PackIcon>
             </Button>
 
             <Button x:Name="AllChats" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" >
                 <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <materialDesign:PackIcon Kind="Chat" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
-                    <Label HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >All chats</Label>
+                    <materialDesign:PackIcon Kind="Chat" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
+                    <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >All chats</Label>
                 </StackPanel>
             </Button>
 
             <Button x:Name="EditButton" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" >
                 <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <materialDesign:PackIcon Kind="TuneVariant" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
-                    <Label HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Edit</Label>
+                    <materialDesign:PackIcon Kind="TuneVariant" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
+                    <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Edit</Label>
                 </StackPanel>
             </Button>
 
             <Button x:Name="AddUser" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" Click="AddUserButton_Click">
                 <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <materialDesign:PackIcon Kind="UserAdd" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
-                    <Label HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Add user</Label>
+                    <materialDesign:PackIcon Kind="UserAdd" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="30" Width="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
+                    <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Add user</Label>
                 </StackPanel>
             </Button>
-
-
-
 
 
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="WhiteSmoke"  Name ="PreviewsPanel">
-
+            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel">
+                
                 <Grid Height="62">
-                    <materialDesign:Card Background="DarkGray" HorizontalContentAlignment="Stretch"
+                    <materialDesign:Card Background="#f1f1f1" HorizontalContentAlignment="Stretch" UniformCornerRadius="6"
                             VerticalContentAlignment="Stretch"  Margin="10,16,10,14" Padding="10,6,6,5"
                             IsEnabled="True" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                         <TextBox  Style="{DynamicResource MaterialDesignComboBoxEditableTextBox}"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
@@ -186,7 +183,7 @@
 
         <GridSplitter Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" ></GridSplitter>
 
-        <ListBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="True">
+        <ListBox Grid.Column="3" Grid.Row="1" Background="#91a882" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="False">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="IsTabStop" Value="False" />
@@ -209,7 +206,7 @@
                 </materialDesign:Card>
             </ListBoxItem>-->
             <local:MessageUiForm></local:MessageUiForm>
-            <local:MessageUiForm></local:MessageUiForm>
+            <local:MessageUiForm MyTurn="True"></local:MessageUiForm>
             <local:MessageUiForm></local:MessageUiForm>
             <local:MessageUiForm></local:MessageUiForm>
 

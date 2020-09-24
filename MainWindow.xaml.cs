@@ -1,4 +1,6 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using RuslanMessager.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,12 +85,14 @@ namespace RuslanMessager
             if (addUserDialog.DoexExecuted == true)
             {
                 PreviewsPanel.Children.Add(new UserDialogPreviewButton(preview.UserName) { });
-            }
-           
-
-        
-
+            }                 
             
+        }
+
+        private void FastAddUserBtn_Click(object sender, RoutedEventArgs e) {
+            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
         }
     }
 }
