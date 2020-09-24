@@ -7,31 +7,26 @@ using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
-    class Message
+    interface IMessage
     {
         /// <summary>
         /// Can contain url on any media
         /// </summary>
-        public string MessageContentUrl { get; set; }
+        string MessageContentUrl { get; set; }
         /// <summary>
         /// Contain full data
         /// </summary>
-        public string SendDateTime { get; set; }
-        public string SenderName { get; set; }
-        public string MessageText { get; set; }
+        string SendDateTime { get; set; }
+        string SenderName { get; set; }
+        string MessageText { get; set; }
         /// <summary>
         /// Show does message read
         /// </summary>
-        public bool DoesRead { get; set; }
+        bool DoesRead { get; set; }
         /// <summary>
         /// Show 
         /// </summary>
-        public bool MyTurn { get; set; }
+        bool MyTurn { get; set; }
 
-        public Message()
-        {
-          
-
-        }
     }
 }

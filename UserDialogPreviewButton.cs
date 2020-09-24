@@ -39,7 +39,7 @@ namespace RuslanMessager
             #region Labels initializing
             //Labels
             MessageNamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content = "Empty name" };
-            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content = "Empty Message........" };
+            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content = "Empty IMessage........" };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top, Content = "00.00.00" };
             #endregion
 
