@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Message.cs" />
+    <Compile Include="IPreview.cs" />
+    <Compile Include="Preview.cs" />
     <Compile Include="MessageUiForm.cs" />
     <Compile Include="UserDialogPreviewButton.cs" />
     <Page Include="MainWindow.xaml">
