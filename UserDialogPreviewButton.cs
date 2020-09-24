@@ -14,8 +14,6 @@ namespace RuslanMessager
 {
     class UserDialogPreviewButton : StackPanel
     {
-        //public Label MessageNameLabel { get; set; }
-
         public Label MessageNamePreviewLabel { get; set; }
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
