@@ -64,6 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IconButton.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="IPreview.cs" />
     <Compile Include="PreviewInfoSerializable.cs" />
