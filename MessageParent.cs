@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
-    class MessageParent : Card
+    class MessageParent
     {
         double id { get; set; }
         string messageText { get; set; }
