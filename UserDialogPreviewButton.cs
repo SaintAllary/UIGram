@@ -100,12 +100,6 @@ namespace RuslanMessager
             innerPanelTime.Children.Add(StatusPreviewIcon);
             #endregion
 
-
-
-
-
-
         }
-
     }
 }
