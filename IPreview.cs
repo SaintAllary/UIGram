@@ -12,6 +12,7 @@ namespace RuslanMessager
         string UserName { get; set; }
         string PictureURL { get; set; }
         string TextPreview { get; set; }
+        string PhoneNumber { get; set; }
     }
 }
 

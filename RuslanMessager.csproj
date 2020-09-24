@@ -63,11 +63,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IconButton.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="IPreview.cs" />
-    <Compile Include="Preview.cs" />
+    <Compile Include="PreviewInfoSerializable.cs" />
     <Compile Include="MessageUiForm.cs" />
     <Compile Include="UserDialogPreviewButton.cs" />
+    <Compile Include="AddUserDialog.xaml.cs">
+      <DependentUpon>AddUserDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +84,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="AddUserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyColorPalette.cs" />
