@@ -47,12 +47,12 @@ namespace RuslanMessager
         private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
             if (MainWindow1.RenderSize.Width < 815) {
                 //MessageBox.Show("test");
-                MainWindowGrid.ColumnDefinitions[2].Width = new GridLength(0);
-                MainWindowGrid.ColumnDefinitions[2].MinWidth = 0;
+                MainWindowGrid.ColumnDefinitions[3].Width = new GridLength(0);
+                MainWindowGrid.ColumnDefinitions[3].MinWidth = 0;
             }
-            else if (MainWindowGrid.ColumnDefinitions[2].MinWidth == 0 && MainWindow1.RenderSize.Width > 815) {
-                MainWindowGrid.ColumnDefinitions[2].Width = new GridLength(1, GridUnitType.Star);
-                MainWindowGrid.ColumnDefinitions[2].MinWidth = 380;
+            else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 815) {
+                MainWindowGrid.ColumnDefinitions[3].Width = new GridLength(1, GridUnitType.Star);
+                MainWindowGrid.ColumnDefinitions[3].MinWidth = 380;
             }
         }
     }
