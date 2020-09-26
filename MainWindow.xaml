@@ -164,8 +164,8 @@
 
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel">
+        <ScrollViewer Grid.Row="1" Grid.Column="1" x:FieldModifier="public" x:Name="LeftScrollViewer">
+            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel" x:FieldModifier="public"  >
                 
                 <Grid Height="62">
                     <materialDesign:Card Background="#f1f1f1" HorizontalContentAlignment="Stretch" UniformCornerRadius="6"

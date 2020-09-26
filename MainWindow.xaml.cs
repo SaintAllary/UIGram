@@ -94,5 +94,11 @@ namespace RuslanMessager
             PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
             PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
         }
+
+        public void Test(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
     }
 }
