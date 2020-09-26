@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
         Title="MainWindow" Height="626" Width="1000" SizeChanged="MainWindow1_SizeChanged"
-        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded">
+        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded" Closing="PostSave">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -229,6 +229,9 @@
                     </Button>
                 </materialDesign:Card>
 
+
+            </ListBox>
+
                 <materialDesign:Card Grid.Column="2" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                     <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
@@ -246,6 +249,7 @@
                         <materialDesign:PackIcon Kind="BookOpenOutline" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
                     </Button>
                 </materialDesign:Card>
+
 
                 <materialDesign:Card Grid.Column="4" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                     <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">

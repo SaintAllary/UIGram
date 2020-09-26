@@ -14,10 +14,37 @@ namespace RuslanMessager
 {
     class UserDialogPreviewButton : StackPanel
     {
-        public Label MessageNamePreviewLabel { get; set; }
+        public Label NamePreviewLabel { get; set; }
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
+
+        public double  GeneralHeight { get; set; }
+        private long id;
+        public long ID
+        {
+            get { return id; }
+            set { id = value ;}
+        }
+        private string userName;
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value;
+                NamePreviewLabel.Content = value;
+            }
+        }
+        private string phoneNumber;
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set { phoneNumber = value; 
+            }
+        }
+        public string PictureURL { get; set; }
+        public string TextPreview { get; set; }
+      
+
         public UserDialogPreviewButton()
         {
             Height = 62;
@@ -38,7 +65,7 @@ namespace RuslanMessager
 
             #region Labels initializing
             //Labels
-            MessageNamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content = "Empty name" };
+            NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content = "Empty name" };
             TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content = "Empty Message........" };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top, Content = "00.00.00" };
             #endregion
@@ -75,7 +102,7 @@ namespace RuslanMessager
             secondGrid.RowDefinitions.Add(new RowDefinition());
             secondGrid.RowDefinitions.Add(new RowDefinition());
 
-            secondGrid.Children.Add(MessageNamePreviewLabel);
+            secondGrid.Children.Add(NamePreviewLabel);
             secondGrid.Children.Add(TextPreviewLabel);
             secondGrid.Children.Add(innerPanelTime);
 
@@ -100,11 +127,9 @@ namespace RuslanMessager
 
         }
 
-        public UserDialogPreviewButton(string userOutName)
+        public UserDialogPreviewButton(string userOutName )
         {
 
-          
-            
             Height = 62;
 
             #region Main Signature of Dialog
@@ -129,7 +154,7 @@ namespace RuslanMessager
 
             #region Labels initializing
             //Labels
-            MessageNamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13,Content = userOutName };
+            NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13 };
             TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0) };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top};
             #endregion
@@ -166,7 +191,7 @@ namespace RuslanMessager
             secondGrid.RowDefinitions.Add(new RowDefinition());
             secondGrid.RowDefinitions.Add(new RowDefinition());
 
-            secondGrid.Children.Add(MessageNamePreviewLabel);
+            secondGrid.Children.Add(NamePreviewLabel);
             secondGrid.Children.Add(TextPreviewLabel);
             secondGrid.Children.Add(innerPanelTime);
 
@@ -185,6 +210,7 @@ namespace RuslanMessager
             StatusPreviewIcon = null;
             #endregion
 
+            UserName = userOutName;
         }
     }
 }
