@@ -73,9 +73,13 @@
     <Compile Include="AddUserDialog.xaml.cs">
       <DependentUpon>AddUserDialog.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="UserPreviewSerializable.cs" />
     <Compile Include="UserPreviewSerializableList.cs" />
     <Compile Include="XmlFunctions.cs" />
+
+    <Compile Include="WindowCommands.cs" />
+
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
