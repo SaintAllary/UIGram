@@ -230,8 +230,6 @@
                 </materialDesign:Card>
 
 
-            </ListBox>
-
                 <materialDesign:Card Grid.Column="2" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                     <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
