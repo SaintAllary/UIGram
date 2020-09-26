@@ -21,6 +21,6 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button Style="{DynamicResource MaterialDesignFlatButton}" Padding="0" Width="80" Height="20"  Margin="0,100,0,0" FontSize="10" Click="CreateNewUser">Confirm</Button>
+        <Button Style="{DynamicResource MaterialDesignToolButton}" Padding="0" Width="80" Height="20"  Margin="0,100,0,0" FontSize="10" Click="CreateNewUser">Confirm</Button>
     </Grid>
 </Window>

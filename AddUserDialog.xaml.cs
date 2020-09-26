@@ -29,7 +29,7 @@ namespace RuslanMessager
         private void CreateNewUser(object sender, RoutedEventArgs e)
         {
     
-            if (Regex.IsMatch(NumberTextBox.Text, "^[0-9]{0,3}[0-9]{3,10}$") && Regex.IsMatch(NameTextBox.Text, @"^[^.]{0,10}$"))
+            if (Regex.IsMatch(NumberTextBox.Text, "^[0-9]{0,3}[0-9]{3,10}$") && Regex.IsMatch(NameTextBox.Text, @"^[^.]{0,25}$"))
             {
                 DoexExecuted = true;
                 Close();
@@ -37,7 +37,7 @@ namespace RuslanMessager
             else
             {
             
-                MessageBox.Show("Check your number, it must be like : 380952425161","Invalid value",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Check your number, it must be like : 380952425161 and name less than 25 symbols","Invalid value",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
     }
