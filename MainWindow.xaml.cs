@@ -62,9 +62,28 @@ namespace RuslanMessager
             else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 815)
                 ResizeColoum(3, 380, 1, GridUnitType.Star);
 
+            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140)
+            {
+                this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
+                MessageBox.Show(MainWindowGrid.ColumnDefinitions[3].Width.Value.ToString());
+            }
+
         }
 
-        public void Test(object sender, RoutedEventArgs e) { }
+        public void Test(object sender, RoutedEventArgs e)
+        {
+            this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
+            this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
+        }
+        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
+            this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
+        }
 
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
 
@@ -78,10 +97,10 @@ namespace RuslanMessager
         {
             if (File.Exists(Properties.Resources.PreviewSavePath))
             {
-            
+
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
-                    (LeftScrollViewer.Content as StackPanel).Children.Add(new UserDialogPreviewButton(item.UserName) {ID= item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
-              
+                    (LeftScrollViewer.Content as StackPanel).Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
+
             }
 
             GC.Collect();
@@ -112,15 +131,15 @@ namespace RuslanMessager
             AddUserDialog addUserDialog = new AddUserDialog();
             addUserDialog.ShowDialog();
 
-         
 
-            UserDialogPreviewButton userDialogPreviewButton = new UserDialogPreviewButton(addUserDialog.NameTextBox.Text) { PhoneNumber = addUserDialog.NumberTextBox.Text ,ID = GetBiggestID() +1};
+
+            UserDialogPreviewButton userDialogPreviewButton = new UserDialogPreviewButton(addUserDialog.NameTextBox.Text) { PhoneNumber = addUserDialog.NumberTextBox.Text, ID = GetBiggestID() + 1 };
 
             //if (File.Exists(Properties.Resources.PreviewSavePath))
             //{
             //    userDialogPreviewButton.ID = XmlFunctions.GetBiggestId() >= GetBiggestID() ? XmlFunctions.GetBiggestId() + 1 : GetBiggestID() + 1;
             //}
-            
+
 
             if (addUserDialog.DoexExecuted == true)
             {
@@ -139,10 +158,12 @@ namespace RuslanMessager
         [Obsolete]
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             var msg = new MessageUiForm(this.MyMsg.Text);
 
             this.MessageListBox.Items.Add(msg);
         }
+
 
         private void PostSave()
         {
@@ -157,7 +178,7 @@ namespace RuslanMessager
                 {
                     if (inneritem is UserDialogPreviewButton)
                     {
-                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;             
+                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
                         prev.userPreviewSerializables.Add(new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName });
                     }
                 }
@@ -193,6 +214,6 @@ namespace RuslanMessager
             PostSave();
         }
 
-       
+
     }
 }
