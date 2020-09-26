@@ -84,7 +84,7 @@ namespace RuslanMessager
               
             }
 
-
+            GC.Collect();
         }
 
         private long GetBiggestID()
