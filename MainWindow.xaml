@@ -192,22 +192,6 @@
                     <Setter Property="IsTabStop" Value="False" />
                 </Style>
             </ListBox.ItemContainerStyle>
-            <!--<ListBoxItem HorizontalAlignment="Right">
-            <materialDesign:Card 
-            Background="{DynamicResource PrimaryHueDarkBrush}"
-            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-            Width="200" Height="30"
-            Padding="8" materialDesign:ShadowAssist.ShadowDepth="Depth0"
-            UniformCornerRadius="6">
-                <TextBlock TextWrapping="Wrap">You can adjust the corner radius</TextBlock>
-            </materialDesign:Card>
-            </ListBoxItem>-->
-
-            <!--<ListBoxItem>
-                <materialDesign:Card Width="120" Height="120">
-                    <TextBlock MaxWidth="100" TextWrapping="Wrap" >sometext AAAAAA AAAAAAAAAAAAAA AAAAAAAAA AA A</TextBlock>
-                </materialDesign:Card>
-            </ListBoxItem>-->
             <local:MessageUiForm></local:MessageUiForm>
             <local:MessageUiForm></local:MessageUiForm>
             <local:MessageUiForm></local:MessageUiForm>
