@@ -39,12 +39,12 @@ namespace RuslanMessager
             msgCard.Width = (MessageTextFormatted.Width + 10) < 350 ? MessageTextFormatted.Width + 10 : 350 + 10;
             msgCard.Background = System.Windows.Media.Brushes.CadetBlue;
             //msgCard.Foreground = System.Windows.Media.Brushes.Red;
-            msgCard.Padding = new System.Windows.Thickness(4, 2, 0, 0);
+            msgCard.Padding = new System.Windows.Thickness(4, 2, 0, 3);
             msgCard.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
             msgCard.UniformCornerRadius = 3;
 
             msgCard.FontSize = 12;
-            msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");
+            msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");            
 
             ChooseAlignment();
 

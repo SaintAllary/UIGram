@@ -13,8 +13,8 @@
             <!--PRIMARY-->
             <!--<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#349fda"/>
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#333333"/>-->
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White"/>
-            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Aqua"/>
+            <!--<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Aqua"/>-->
             <!--<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#015f92"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>-->
             <!--ACCENT-->
