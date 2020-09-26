@@ -83,7 +83,6 @@ namespace RuslanMessager
         public bool DoesRead { get; set; }
 
         private bool myTurn;
-
         public bool MyTurn {
             get { return myTurn; }
             set {

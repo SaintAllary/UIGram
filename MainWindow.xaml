@@ -166,7 +166,7 @@
 
         <ScrollViewer Grid.Row="1" Grid.Column="1" x:FieldModifier="public" x:Name="LeftScrollViewer">
             <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel" x:FieldModifier="public"  >
-                
+
 
                 <Grid Height="62">
                     <materialDesign:Card Background="#f1f1f1" HorizontalContentAlignment="Stretch" UniformCornerRadius="6"
@@ -190,24 +190,47 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="46"></RowDefinition>
             </Grid.RowDefinitions>
+            
+            
 
-            <ListBox x:Name="MessageListBox" Grid.Column="3" Grid.Row="1" Background="#91a882" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="False">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="IsTabStop" Value="False" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
+            <ScrollViewer Grid.Row="1" Background="Transparent">
+                <ListBox x:Name="MessageListBox" Background="#91a882" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="False">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsTabStop" Value="False" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
 
-                <!--<local:MessageUiForm></local:MessageUiForm>-->               
+                    <!--<local:MessageUiForm></local:MessageUiForm>-->
 
-            </ListBox>
+                </ListBox>
+            </ScrollViewer>
 
-            <StackPanel Grid.Row="3" Height="46" Orientation="Horizontal">
-                <TextBox x:Name="MyMsg" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="46" Width="300" AcceptsReturn="True"></TextBox>
-                <Button Height="46" Width="46" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+            <Grid Grid.Row="3" Height="46" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="46"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="46"></ColumnDefinition>
+                    <ColumnDefinition Width="46"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Height="46" Width="46" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <RotateTransform Angle="135" />
+                    </Button.RenderTransform>
+                    <materialDesign:PackIcon Kind="Attachment" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
+                </Button>
+
+                <TextBox Grid.Column="1" x:Name="MyMsg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True"></TextBox>
+
+                <Button Grid.Column="2" Height="46" Width="46" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <materialDesign:PackIcon Kind="EmoticonHappyOutline" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
+                </Button>
+
+                <Button Grid.Column="3" Height="46" Width="46" Padding="-10" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
                     <materialDesign:PackIcon Kind="Send" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
-                </Button>                
-            </StackPanel>
+                </Button>
+            </Grid>
 
         </Grid>
 
