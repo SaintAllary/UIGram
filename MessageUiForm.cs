@@ -23,6 +23,7 @@ namespace RuslanMessager
         [Obsolete]
         public MessageUiForm(string _messageText, bool IsMyMsg = true) : base() {
             packIcon = new PackIcon();
+            packIcon.Foreground = Brushes.White;
             myTurn = IsMyMsg;
             msgCard = new Card();
 
@@ -56,8 +57,8 @@ namespace RuslanMessager
             packIcon.Kind = PackIconKind.NetworkStrength4;
             packIcon.Width = 10;
             packIcon.Height = 10;
-            packIcon.Margin = new System.Windows.Thickness(-4, -9, 0, 0);
-            packIcon.Foreground = Brushes.White;           
+            packIcon.Margin = new System.Windows.Thickness(-4, -9, 0, 0);        
+            
 
             panel.Children.Add(packIcon);
 
@@ -83,7 +84,6 @@ namespace RuslanMessager
         public bool DoesRead { get; set; }
 
         private bool myTurn;
-
         public bool MyTurn {
             get { return myTurn; }
             set {

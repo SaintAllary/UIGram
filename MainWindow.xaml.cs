@@ -54,16 +54,16 @@ namespace RuslanMessager
             DragMove();
         }
 
-        private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
+        private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
 
             if (MainWindow1.RenderSize.Width < 815)
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
             else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 815)
                 ResizeColoum(3, 380, 1, GridUnitType.Star);
 
-            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140)
-            {
+
+            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140) {
+
                 this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
                 MessageBox.Show(MainWindowGrid.ColumnDefinitions[3].Width.Value.ToString());
             }
@@ -213,7 +213,6 @@ namespace RuslanMessager
         {
             PostSave();
         }
-
 
     }
 }
