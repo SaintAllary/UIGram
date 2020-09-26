@@ -198,8 +198,6 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
 
-                <!--<local:MessageUiForm></local:MessageUiForm>-->               
-
             </ListBox>
 
             <StackPanel Grid.Row="3" Height="46" Orientation="Horizontal">
