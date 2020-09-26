@@ -103,6 +103,8 @@ namespace RuslanMessager
         public UserDialogPreviewButton(string userOutName)
         {
 
+          
+            
             Height = 62;
 
             #region Main Signature of Dialog
@@ -110,9 +112,15 @@ namespace RuslanMessager
 
             sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' 
                             xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' ");
-            sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}' Height ='62' />");
+            sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}' Height ='62'  />");
 
             Button myButton = (Button)XamlReader.Parse(sb.ToString());
+
+            foreach (var item in Application.Current.Windows)
+            {
+                if (item.GetType() == typeof(MainWindow))
+                    myButton.Click += (item as MainWindow).Test;
+            }
 
             myButton.Padding = new Thickness(0);
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
