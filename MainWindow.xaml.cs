@@ -60,7 +60,17 @@ namespace RuslanMessager
 
         }
 
-        public void Test(object sender, RoutedEventArgs e) { }
+        public void Test(object sender, RoutedEventArgs e) {
+            this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
+            this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
+        }
+        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+        }
+        private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e) {
+            this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
+            this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
+        }
 
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
 
@@ -100,5 +110,11 @@ namespace RuslanMessager
 
             this.MessageListBox.Items.Add(msg);
         }
+
+        private void OpenFile_Executed(object sender, ExecutedRoutedEventArgs e) {
+
+        }
+
+
     }
 }
