@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
         Title="MainWindow" Height="626" Width="1000" SizeChanged="MainWindow1_SizeChanged"
-        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded">
+        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded" Closing="PostSave">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"

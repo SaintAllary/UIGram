@@ -76,35 +76,64 @@ namespace RuslanMessager
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
-
+            if (File.Exists(Properties.Resources.PreviewSavePath))
+            {
+            
+                foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
+                    (LeftScrollViewer.Content as StackPanel).Children.Add(new UserDialogPreviewButton(item.UserName) {ID= item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
+              
+            }
 
 
         }
 
+        private long GetBiggestID()
+        {
+            long tmp = 0;
+            foreach (var item in (LeftScrollViewer.Content as StackPanel).Children)
+            {
+
+                if (item is UserDialogPreviewButton)
+                {
+                    if ((item as UserDialogPreviewButton).ID > tmp)
+                    {
+                        tmp = (item as UserDialogPreviewButton).ID;
+                    }
+
+                }
+            }
+            return tmp;
+
+        }
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            PreviewInfoSerializable preview = new PreviewInfoSerializable();
+
 
             AddUserDialog addUserDialog = new AddUserDialog();
             addUserDialog.ShowDialog();
 
-  
-            preview.UserName = addUserDialog.NameTextBox.Text;
-            preview.PhoneNumber = addUserDialog.NumberTextBox.Text;
+         
 
+            UserDialogPreviewButton userDialogPreviewButton = new UserDialogPreviewButton(addUserDialog.NameTextBox.Text) { PhoneNumber = addUserDialog.NumberTextBox.Text ,ID = GetBiggestID() +1};
+
+            //if (File.Exists(Properties.Resources.PreviewSavePath))
+            //{
+            //    userDialogPreviewButton.ID = XmlFunctions.GetBiggestId() >= GetBiggestID() ? XmlFunctions.GetBiggestId() + 1 : GetBiggestID() + 1;
+            //}
+            
 
             if (addUserDialog.DoexExecuted == true)
             {
-                PreviewsPanel.Children.Add(new UserDialogPreviewButton(preview.UserName) { });
+                PreviewsPanel.Children.Add(userDialogPreviewButton);
             }
 
         }
 
         private void FastAddUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
-            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
-            PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+            //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+            //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+            //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
         }
 
         [Obsolete]
@@ -115,7 +144,7 @@ namespace RuslanMessager
             this.MessageListBox.Items.Add(msg);
         }
 
-        private void PostSave(object sender, EventArgs e)
+        private void PostSave()
         {
 
             CleanSerializableFile(Properties.Resources.PreviewSavePath);
@@ -128,18 +157,14 @@ namespace RuslanMessager
                 {
                     if (inneritem is UserDialogPreviewButton)
                     {
-                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
-                        MessageBox.Show(item.UserName);
+                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;             
                         prev.userPreviewSerializables.Add(new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName });
                     }
-
-
                 }
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
 
@@ -151,13 +176,23 @@ namespace RuslanMessager
             }
 
         }
+
         private void CleanSerializableFile(string path)
         {
             if (File.Exists(path))
-            {
                 File.Delete(path);
-
-            }
         }
+
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void PostSave(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            PostSave();
+        }
+
+       
     }
 }

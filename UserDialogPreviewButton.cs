@@ -19,16 +19,14 @@ namespace RuslanMessager
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
 
+        public double  GeneralHeight { get; set; }
         private long id;
-
         public long ID
         {
             get { return id; }
             set { id = value ;}
         }
-
         private string userName;
-
         public string UserName
         {
             get { return userName; }
@@ -37,7 +35,6 @@ namespace RuslanMessager
             }
         }
         private string phoneNumber;
-
         public string PhoneNumber
         {
             get { return phoneNumber; }
@@ -130,11 +127,9 @@ namespace RuslanMessager
 
         }
 
-        public UserDialogPreviewButton(string userOutName)
+        public UserDialogPreviewButton(string userOutName )
         {
 
-          
-            
             Height = 62;
 
             #region Main Signature of Dialog
@@ -159,7 +154,7 @@ namespace RuslanMessager
 
             #region Labels initializing
             //Labels
-            NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13,Content = userOutName };
+            NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13 };
             TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0) };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top};
             #endregion
@@ -215,6 +210,7 @@ namespace RuslanMessager
             StatusPreviewIcon = null;
             #endregion
 
+            UserName = userOutName;
         }
     }
 }
