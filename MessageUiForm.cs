@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -16,12 +17,18 @@ namespace RuslanMessager
         FormattedText MessageTextFormatted;
         TextBlock textBlock;
         Card msgCard;
+        PackIcon packIcon;
+        StackPanel panel;
 
         [Obsolete]
-        public MessageUiForm() : base() {
+        public MessageUiForm(string _messageText, bool IsMyMsg = true) : base() {
+            packIcon = new PackIcon();
+            myTurn = IsMyMsg;
             msgCard = new Card();
 
-            MessageText = "SOME TEXT new line aaa AAAAAAABAaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBaaaaaaaaaaaaaaaaaaaaaaaA\n\n\n\naaa";
+            MessageText = string.Empty;
+            MessageText = _messageText;
+
             MessageTextFormatted = new FormattedText(MessageText, CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, new Typeface("Calibri"), 12, System.Windows.Media.Brushes.Black);
 
             textBlock = new TextBlock();
@@ -38,19 +45,32 @@ namespace RuslanMessager
             msgCard.FontSize = 12;
             msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");
 
+            ChooseAlignment();
 
             msgCard.Content = textBlock;
 
-            ChooseAlignment();
+            panel = new StackPanel();
+            panel.Children.Add(msgCard);
 
-            this.AddChild(msgCard);
-            this.Background = Brushes.Transparent;
+            
+            packIcon.Kind = PackIconKind.NetworkStrength4;
+            packIcon.Width = 10;
+            packIcon.Height = 10;
+            packIcon.Margin = new System.Windows.Thickness(-4, -9, 0, 0);
+            packIcon.Foreground = Brushes.White;           
+
+            panel.Children.Add(packIcon);
+
+            this.AddChild(panel);
+            this.Background = Brushes.Transparent;           
         }
 
         private void ChooseAlignment() {
             if (MyTurn) {
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 msgCard.Background = new SolidColorBrush(Color.FromRgb(239, 253, 222));
+                packIcon.Foreground = new SolidColorBrush(Color.FromRgb(239, 253, 222));
+                //(packIcon.RenderTransform).((ScaleTransform)packIcon.RenderTransform).ScaleX = -1;
             }
             else
                 msgCard.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
