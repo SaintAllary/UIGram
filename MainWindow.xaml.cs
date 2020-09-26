@@ -56,17 +56,16 @@ namespace RuslanMessager
 
         }
 
-        private void ColorZone_Loaded(object sender, RoutedEventArgs e) {
+        public void Test(object sender, RoutedEventArgs e) { }
 
-        }
+        private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
+
         private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
             MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(1, gridUnitType);
             MainWindowGrid.ColumnDefinitions[indexPosition].MinWidth = minWidth;
         }
 
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
-
-        }
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) { }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e) {
             PreviewInfoSerializable preview = new PreviewInfoSerializable();
@@ -93,7 +92,7 @@ namespace RuslanMessager
         private void Button_Click(object sender, RoutedEventArgs e) {
             var msg = new MessageUiForm(this.MyMsg.Text);
             //msg.MessageText = ;
-            
+
             this.MessageListBox.Items.Add(msg);
         }
     }
