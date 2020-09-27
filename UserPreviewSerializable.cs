@@ -11,9 +11,10 @@ namespace RuslanMessager
     {
         public UserPreviewSerializable()
         {
-
+            LastMSG = new Message();
         }
 
+        public Message LastMSG;
         public long ID;
         public string UserName;
         public string PictureURL;

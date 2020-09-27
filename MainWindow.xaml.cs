@@ -98,23 +98,12 @@ namespace RuslanMessager
         public void ClearCurrentDialog()
         {
             MessageListBox.Items.Clear();
-            //LastMSG = null; 
+            //LastMSG = null;
 
         }
         public void UpdatePreview()
         {
-            //if (LastMSG != null)
-            //{
-            //    foreach (var item in PreviewsPanel.Children)
-            //    {
-            //        if (item is UserDialogPreviewButton && (item as UserDialogPreviewButton).ID == CurrentChatID)
-            //        {
-            //            (item as UserDialogPreviewButton).TextPreview = LastMSG.MessageText;
-            //            (item as UserDialogPreviewButton).DateTimePreviewer = DateTime.Parse(LastMSG.SendDateTime).ToShortDateString();
-
-            //        }
-            //    }
-            //}
+           
            
         }
 
@@ -139,6 +128,12 @@ namespace RuslanMessager
             }
 
             GC.Collect();
+        }
+
+        private void UpdatePreviewInfo(Message message)
+        {
+           
+
         }
 
         private string GetLastMessagesDate() {
