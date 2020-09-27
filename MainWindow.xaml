@@ -298,14 +298,15 @@
                 <TextBox Grid.Column="1" x:Name="MyMsg" Style="{DynamicResource MaterialDesignComboBoxEditableTextBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True"></TextBox>
 
                 <materialDesign:Card Grid.Column="2" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="2" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <Button Grid.Column="2" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}">
                         <materialDesign:PackIcon Kind="EmoticonHappyOutline" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
                     </Button>
                 </materialDesign:Card>
 
-                <materialDesign:Card Grid.Column="3" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Click="SendMsgBtn_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                <materialDesign:Card Grid.Column="3" Height="40" Width="40"  UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" x:Name="SendBtn" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
                         <materialDesign:PackIcon Kind="Send" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
+
                     </Button>
                 </materialDesign:Card>
 

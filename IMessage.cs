@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
-    interface IMessage
+    public interface IMessage
     {
         /// <summary>
         /// Can contain url on any media

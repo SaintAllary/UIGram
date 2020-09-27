@@ -25,11 +25,22 @@ namespace RuslanMessager
     /// </summary>
     public partial class MainWindow : Window
     {
+
         StackPanel BumpPreviewCollection { get; set; }
 
-        public MainWindow() {
+        public long CurrentChatID { get; set; }
+        public MainWindow()
+        {
             InitializeComponent();
+            InitializeLogic();
+        }
 
+        public void InitializeLogic()
+        {
+            if (!Directory.Exists(Properties.Resources.UserDataDirPath))
+            {
+                Directory.CreateDirectory(Properties.Resources.UserDataDirPath);
+            }
 
         }
 
@@ -59,6 +70,11 @@ namespace RuslanMessager
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
             else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715)
                 ResizeColoum(3, 380, 1, GridUnitType.Star);
+            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140) {
+
+                this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
+ 
+            }
         }
 
         public void Test(object sender, RoutedEventArgs e) {
@@ -66,10 +82,55 @@ namespace RuslanMessager
 
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
+
+            CreateAllDirsByID();
+
+
+            foreach (var item in PreviewsPanel.Children)
+            {
+                if (item is UserDialogPreviewButton)
+                    if ((item as UserDialogPreviewButton).Children[0] == (sender as Button))
+                        CurrentChatID = (item as UserDialogPreviewButton).ID;
+
+            }
+
+    
+
+
+
+
+
+
         }
+
         private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e) {
-            e.CanExecute = true;
+                    e.CanExecute = true;
         }
+
+
+        public void CreateAllDirsByID()
+        {
+            foreach (var item in PreviewsPanel.Children)
+            {
+
+
+                if (item is UserDialogPreviewButton)
+                {
+                    var s = item as UserDialogPreviewButton;
+                    var creatingPAth = Properties.Resources.UserDataDirPath + "\\" + s.ID;
+
+                    if (!Directory.Exists(creatingPAth))
+                        Directory.CreateDirectory(creatingPAth);
+                }
+            }
+        }
+
+
+        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e)
+        {
+                    e.CanExecute = true;
+        }
+
         private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e) {
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
@@ -125,13 +186,10 @@ namespace RuslanMessager
 
             UserDialogPreviewButton userDialogPreviewButton = new UserDialogPreviewButton(addUserDialog.NameTextBox.Text) { PhoneNumber = addUserDialog.NumberTextBox.Text, ID = GetBiggestID() + 1 };
 
-            //if (File.Exists(Properties.Resources.PreviewSavePath))
-            //{
-            //    userDialogPreviewButton.ID = XmlFunctions.GetBiggestId() >= GetBiggestID() ? XmlFunctions.GetBiggestId() + 1 : GetBiggestID() + 1;
-            //}
 
+            if (addUserDialog.DoexExecuted == true)
+            {
 
-            if (addUserDialog.DoexExecuted == true) {
                 PreviewsPanel.Children.Add(userDialogPreviewButton);
             }
 
@@ -139,8 +197,11 @@ namespace RuslanMessager
 
         private void FastAddUserBtn_Click(object sender, RoutedEventArgs e) {
             //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
-            //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
-            //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
+        }
+
+        private void FastAddUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         [Obsolete]
@@ -149,11 +210,20 @@ namespace RuslanMessager
 
             this.MessageListBox.Items.Add(msg);
 
+
             for (int i = 0; i < 10; i++)
                 this.ChatScrollViewer.PageDown();
+        
+
+
+
+            XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
+
+
         }
 
-
+        
+     
         private void PostSave() {
             CleanSerializableFile(Properties.Resources.PreviewSavePath);
 

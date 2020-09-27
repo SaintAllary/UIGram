@@ -120,4 +120,10 @@
   <data name="PreviewSavePath" xml:space="preserve">
     <value>PreviewData.xml</value>
   </data>
+  <data name="SaveFormatter" xml:space="preserve">
+    <value>.xml</value>
+  </data>
+  <data name="UserDataDirPath" xml:space="preserve">
+    <value>UserData</value>
+  </data>
 </root>
