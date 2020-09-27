@@ -21,7 +21,7 @@ namespace RuslanMessager
         StackPanel panel;
 
         [Obsolete]
-        public MessageUiForm(string _messageText, bool IsMyMsg = true) : base() {
+        public MessageUiForm(string _messageText, string _SendDateTime, string _SenderName, bool IsMyMsg = true, bool _isRead = false) : base() {
             packIcon = new PackIcon();
             packIcon.Foreground = Brushes.White;
             myTurn = IsMyMsg;
@@ -29,6 +29,9 @@ namespace RuslanMessager
 
             MessageText = string.Empty;
             MessageText = _messageText;
+            SendDateTime = _SendDateTime;
+            SenderName = _SenderName;
+            DoesRead = _isRead;
 
             MessageTextFormatted = new FormattedText(MessageText, CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, new Typeface("Calibri"), 12, System.Windows.Media.Brushes.Black);
 
