@@ -85,7 +85,58 @@ namespace RuslanMessager
 
             CreateAllDirsByID();
 
+            SetCurrentChatIdID(sender);
 
+            MessageListBox.Items.Clear();
+
+            LoadChat();
+
+
+
+
+
+
+        }
+
+        private void LoadChat()
+        {
+            var s = XmlFunctions.GetDayJournal(CurrentChatID, GetLastMessagesDate());
+            if (s != null)
+            {
+                foreach (var item in s.Messages)
+                {
+                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText)
+                    {DoesRead=item.DoesRead,MessageContentUrl= item.MessageContentUrl,MyTurn=  item.MyTurn,
+                        SenderName= item.SenderName,SendDateTime= item.SendDateTime});
+
+                }
+            }
+
+            GC.Collect();
+           
+        }
+
+        private string GetLastMessagesDate()
+        {
+            //if (File.Exists(XmlFunctions.CreatePathToJournal(CurrentChatID,DateTime.Now.ToShortDateString())))
+            //{
+            //    return XmlFunctions.CreatePathToJournal(CurrentChatID, DateTime.Now.ToShortDateString());
+            //}
+            //else
+            //{
+            //    DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            //    foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath+"\\"+ CurrentChatID))
+            //    {
+            //        Dat
+            //    }
+            //}
+
+            return DateTime.Now.ToShortDateString();
+
+        }
+
+        private void SetCurrentChatIdID(object sender)
+        {
             foreach (var item in PreviewsPanel.Children)
             {
                 if (item is UserDialogPreviewButton)
@@ -93,13 +144,6 @@ namespace RuslanMessager
                         CurrentChatID = (item as UserDialogPreviewButton).ID;
 
             }
-
-    
-
-
-
-
-
 
         }
 
@@ -254,7 +298,6 @@ namespace RuslanMessager
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             if ((sender as TextBox).Text == "") {
-                //MessageBox.Show("clear");
                 this.LeftScrollViewer.Content = this.PreviewsPanel;
                 return;
             }
