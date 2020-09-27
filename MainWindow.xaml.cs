@@ -30,7 +30,7 @@ namespace RuslanMessager
 
         public long CurrentChatID { get; set; }
         public DateTime LastDateToLoad { get; set; }
-        //public Message LastMSG { get; set; }
+        public Message LastMSG { get; set; }
         public MainWindow() {
             InitializeComponent();
             InitializeLogic();
