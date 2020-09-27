@@ -68,5 +68,23 @@ namespace RuslanMessager.Properties {
                 return ResourceManager.GetString("PreviewSavePath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .xml.
+        /// </summary>
+        internal static string SaveFormatter {
+            get {
+                return ResourceManager.GetString("SaveFormatter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserData.
+        /// </summary>
+        internal static string UserDataDirPath {
+            get {
+                return ResourceManager.GetString("UserDataDirPath", resourceCulture);
+            }
+        }
     }
 }
