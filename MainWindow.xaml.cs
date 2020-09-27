@@ -99,7 +99,7 @@ namespace RuslanMessager
             var s = XmlFunctions.GetDayJournal(CurrentChatID, GetLastMessagesDate());
             if (s != null) {
                 foreach (var item in s.Messages) {
-                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText) {
+                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName) {
                         DoesRead = item.DoesRead,
                         MessageContentUrl = item.MessageContentUrl,
                         MyTurn = item.MyTurn,
