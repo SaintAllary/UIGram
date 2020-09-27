@@ -76,7 +76,7 @@ namespace RuslanMessager
         }
 
         [Obsolete]
-        public void Test(object sender, RoutedEventArgs e) {
+        public void LoadChatFromPrev(object sender, RoutedEventArgs e) {
             //SwitchChatCleaner();
             this.ChatTopName_TextBlock.Text = (sender as Button).Tag.ToString();
 
@@ -89,18 +89,11 @@ namespace RuslanMessager
 
             MessageListBox.Items.Clear();
 
-
-            LoadChat();
-
-
-
-
-
-
+            LoadChatMsgs();
         }
 
         [Obsolete]
-        private void LoadChat() {
+        private void LoadChatMsgs() {
             var s = XmlFunctions.GetDayJournal(CurrentChatID, GetLastMessagesDate());
             if (s != null) {
                 foreach (var item in s.Messages) {
@@ -114,7 +107,7 @@ namespace RuslanMessager
                 }
                 MoveChatScrollToDownEnd();
 
-                LastDateToLoad = DateTime.Parse(DateTime.Parse(s.Messages.First().SendDateTime).ToShortDateString());
+                //LastDateToLoad = DateTime.Parse(DateTime.Parse(s.Messages.First().SendDateTime).ToShortDateString());
             }
 
             GC.Collect();

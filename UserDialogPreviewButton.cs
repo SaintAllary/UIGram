@@ -141,7 +141,7 @@ namespace RuslanMessager
 
             foreach (var item in Application.Current.Windows) {
                 if (item.GetType() == typeof(MainWindow))
-                    myButton.Click += (item as MainWindow).Test;
+                    myButton.Click += (item as MainWindow).LoadChatFromPrev;
             }
 
             myButton.Padding = new Thickness(0);
