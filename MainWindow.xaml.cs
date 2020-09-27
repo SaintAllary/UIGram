@@ -29,6 +29,7 @@ namespace RuslanMessager
         StackPanel BumpPreviewCollection { get; set; }
 
         public long CurrentChatID { get; set; }
+        public DateTime LastDateToLoad { get; set; }
         public MainWindow() {
             InitializeComponent();
             InitializeLogic();
@@ -74,7 +75,9 @@ namespace RuslanMessager
             }
         }
 
+        [Obsolete]
         public void Test(object sender, RoutedEventArgs e) {
+            //SwitchChatCleaner();
             this.ChatTopName_TextBlock.Text = (sender as Button).Tag.ToString();
 
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
@@ -86,6 +89,7 @@ namespace RuslanMessager
 
             MessageListBox.Items.Clear();
 
+
             LoadChat();
 
 
@@ -95,6 +99,7 @@ namespace RuslanMessager
 
         }
 
+        [Obsolete]
         private void LoadChat() {
             var s = XmlFunctions.GetDayJournal(CurrentChatID, GetLastMessagesDate());
             if (s != null) {
@@ -108,20 +113,22 @@ namespace RuslanMessager
                     });
                 }
                 MoveChatScrollToDownEnd();
+
+                LastDateToLoad = DateTime.Parse(DateTime.Parse(s.Messages.First().SendDateTime).ToShortDateString());
             }
 
             GC.Collect();
         }
 
         private string GetLastMessagesDate() {
-            //if (File.Exists(XmlFunctions.CreatePathToJournal(CurrentChatID,DateTime.Now.ToShortDateString())))
+            //if (File.Exists(XmlFunctions.CreatePathToJournal(CurrentChatID, DateTime.Now.ToShortDateString())))
             //{
             //    return XmlFunctions.CreatePathToJournal(CurrentChatID, DateTime.Now.ToShortDateString());
             //}
             //else
             //{
             //    DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            //    foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath+"\\"+ CurrentChatID))
+            //    foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID))
             //    {
             //        Dat
             //    }
@@ -163,6 +170,13 @@ namespace RuslanMessager
         private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e) {
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
+            SwitchChatCleaner();
+        }
+
+        private void SwitchChatCleaner()
+        {
+            LastDateToLoad = DateTime.Parse(DateTime.Now.ToShortDateString());
+
         }
 
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
