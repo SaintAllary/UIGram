@@ -26,7 +26,8 @@ namespace RuslanMessager
         {
             get { return dateTimePreviewer; }
             set { dateTimePreviewer = value;
-                DateTimePreviewLabel.Content = value;
+                if (value !=null)
+                DateTimePreviewLabel.Content =  DateTime.Parse(value).ToShortDateString() == DateTime.Now.ToShortDateString()? DateTime.Parse(value).ToShortTimeString(): DateTime.Parse(value).ToShortDateString();
             }
         }
 
@@ -175,7 +176,7 @@ namespace RuslanMessager
             #region Labels initializing
             //Labels
             NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13 };
-            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0) };
+            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"),VerticalContentAlignment= VerticalAlignment.Top, FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, -6, 0, 0), Height= 25};
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top };
             #endregion
 

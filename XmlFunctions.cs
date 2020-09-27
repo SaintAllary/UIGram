@@ -107,7 +107,40 @@ namespace RuslanMessager
 
         }
 
-      
+        public static void UpdatePreviewByMsg(UserPreviewSerializableList userPreviewSerializableList)
+        {
+            UserPreviewSerializableList uPSL = userPreviewSerializableList;
+
+            if (File.Exists(Properties.Resources.PreviewSavePath))
+                File.Delete(Properties.Resources.PreviewSavePath);
+
+            XmlSerializer formatter = new XmlSerializer(typeof(UserPreviewSerializableList));
+
+            using (FileStream fs = new FileStream(Properties.Resources.PreviewSavePath, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, uPSL);
+             }
+        }
+
+
+
+        //public static UserPreviewSerializable GetPreviewListInfo(long ID)
+        //{
+        //    UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
+
+        //    XmlSerializer formatter = new XmlSerializer(typeof(UserPreviewSerializableList));
+
+        //    using (FileStream fs = new FileStream(Properties.Resources.PreviewSavePath, FileMode.OpenOrCreate))
+        //    {
+        //        userPreviewSerializableList = (UserPreviewSerializableList)formatter.Deserialize(fs);
+
+
+        //    }
+
+        //    return userPreviewSerializableList.userPreviewSerializables;
+        //}
+
+
 
 
     }
