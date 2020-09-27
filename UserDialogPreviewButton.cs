@@ -19,6 +19,17 @@ namespace RuslanMessager
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
 
+
+        private string dateTimePreviewer;
+
+        public string DateTimePreviewer
+        {
+            get { return dateTimePreviewer; }
+            set { dateTimePreviewer = value;
+                DateTimePreviewLabel.Content = value;
+            }
+        }
+
         public double GeneralHeight { get; set; }
         private long id;
         public long ID {
@@ -41,7 +52,18 @@ namespace RuslanMessager
             }
         }
         public string PictureURL { get; set; }
-        public string TextPreview { get; set; }
+
+
+        private string textPreview;
+
+        public string TextPreview
+        {
+            get { return textPreview; }
+            set { textPreview = value;
+                TextPreviewLabel.Content = value;
+            }
+        }
+
 
 
         public UserDialogPreviewButton() {
