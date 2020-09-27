@@ -44,33 +44,35 @@ namespace RuslanMessager
             msgCard.UniformCornerRadius = 3;
 
             msgCard.FontSize = 12;
-            msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");            
+            msgCard.FontFamily = new System.Windows.Media.FontFamily("Calibri");
 
             ChooseAlignment();
 
             msgCard.Content = textBlock;
 
             panel = new StackPanel();
-            panel.Children.Add(msgCard);
 
-            
+
             packIcon.Kind = PackIconKind.NetworkStrength4;
-            packIcon.Width = 10;
-            packIcon.Height = 10;
-            packIcon.Margin = new System.Windows.Thickness(-4, -9, 0, 0);        
-            
+            packIcon.Width = 9;
+            packIcon.Height = 9;
+            packIcon.Margin = new System.Windows.Thickness(-4, -8, 0, 0);
 
+
+            panel.Children.Add(msgCard);
             panel.Children.Add(packIcon);
 
             this.AddChild(panel);
-            this.Background = Brushes.Transparent;           
+            this.Background = Brushes.Transparent;
         }
 
         private void ChooseAlignment() {
             if (MyTurn) {
                 this.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 msgCard.Background = new SolidColorBrush(Color.FromRgb(239, 253, 222));
-                packIcon.Foreground = new SolidColorBrush(Color.FromRgb(239, 253, 222));
+                //packIcon.Foreground = new SolidColorBrush(Color.FromRgb(239, 253, 222));
+                packIcon.Foreground = Brushes.Transparent;
+                //packIcon.Kind = PackIconKind.None;
                 //(packIcon.RenderTransform).((ScaleTransform)packIcon.RenderTransform).ScaleX = -1;
             }
             else

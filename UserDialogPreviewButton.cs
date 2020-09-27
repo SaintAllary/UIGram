@@ -19,34 +19,32 @@ namespace RuslanMessager
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
 
-        public double  GeneralHeight { get; set; }
+        public double GeneralHeight { get; set; }
         private long id;
-        public long ID
-        {
+        public long ID {
             get { return id; }
-            set { id = value ;}
+            set { id = value; }
         }
         private string userName;
-        public string UserName
-        {
+        public string UserName {
             get { return userName; }
-            set { userName = value;
+            set {
+                userName = value;
                 NamePreviewLabel.Content = value;
             }
         }
         private string phoneNumber;
-        public string PhoneNumber
-        {
+        public string PhoneNumber {
             get { return phoneNumber; }
-            set { phoneNumber = value; 
+            set {
+                phoneNumber = value;
             }
         }
         public string PictureURL { get; set; }
         public string TextPreview { get; set; }
-      
 
-        public UserDialogPreviewButton()
-        {
+
+        public UserDialogPreviewButton() {
             Height = 62;
 
             #region Main Signature of Dialog
@@ -61,6 +59,7 @@ namespace RuslanMessager
             myButton.Padding = new Thickness(0);
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+            myButton.Tag = UserName.ToString();
             #endregion
 
             #region Labels initializing
@@ -79,7 +78,7 @@ namespace RuslanMessager
             Grid.SetRow(innerPanelTime, 0);
             innerPanelTime.Children.Add(DateTimePreviewLabel);
 
-            
+
 
 
             Grid grid = new Grid();
@@ -89,7 +88,7 @@ namespace RuslanMessager
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(62) });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            grid.Children.Add(new Ellipse() { Fill =new  SolidColorBrush(Color.FromRgb(103,58,183)), Margin = new System.Windows.Thickness(8) });// АВАТАРКА
+            grid.Children.Add(new Ellipse() { Fill = new SolidColorBrush(Color.FromRgb(103, 58, 183)), Margin = new System.Windows.Thickness(8) });// АВАТАРКА
 
 
 
@@ -98,7 +97,7 @@ namespace RuslanMessager
             Grid.SetColumn(secondGrid, 1);
 
             secondGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            secondGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width=new System.Windows.GridLength(75)});
+            secondGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(75) });
             secondGrid.RowDefinitions.Add(new RowDefinition());
             secondGrid.RowDefinitions.Add(new RowDefinition());
 
@@ -127,8 +126,7 @@ namespace RuslanMessager
 
         }
 
-        public UserDialogPreviewButton(string userOutName )
-        {
+        public UserDialogPreviewButton(string userOutName) {
 
             Height = 62;
 
@@ -141,8 +139,7 @@ namespace RuslanMessager
 
             Button myButton = (Button)XamlReader.Parse(sb.ToString());
 
-            foreach (var item in Application.Current.Windows)
-            {
+            foreach (var item in Application.Current.Windows) {
                 if (item.GetType() == typeof(MainWindow))
                     myButton.Click += (item as MainWindow).Test;
             }
@@ -150,13 +147,14 @@ namespace RuslanMessager
             myButton.Padding = new Thickness(0);
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
+            myButton.Tag = userOutName.ToString();
             #endregion
 
             #region Labels initializing
             //Labels
             NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13 };
             TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0) };
-            DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top};
+            DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top };
             #endregion
 
             #region Grids settings
