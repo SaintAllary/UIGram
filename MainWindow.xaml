@@ -304,7 +304,7 @@
                 </materialDesign:Card>
 
                 <materialDesign:Card Grid.Column="3" Height="40" Width="40"  UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" x:Name="SendBtn" HorizontalAlignment="Right" Click="Button_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" x:Name="SendBtn" HorizontalAlignment="Right" Click="SendMsgBtn_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
                         <materialDesign:PackIcon Kind="Send" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
 
                     </Button>

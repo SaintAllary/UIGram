@@ -125,12 +125,6 @@ namespace RuslanMessager
             }
         }
 
-
-        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e)
-        {
-                    e.CanExecute = true;
-        }
-
         private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e) {
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
@@ -197,11 +191,6 @@ namespace RuslanMessager
 
         private void FastAddUserBtn_Click(object sender, RoutedEventArgs e) {
             //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
-        }
-
-        private void FastAddUserBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         [Obsolete]
@@ -279,5 +268,6 @@ namespace RuslanMessager
                 }
             }
         }
+
     }
 }
