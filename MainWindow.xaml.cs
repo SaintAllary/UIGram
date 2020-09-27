@@ -229,7 +229,7 @@ namespace RuslanMessager
 
         [Obsolete]
         private void SendMsgBtn_Click(object sender, RoutedEventArgs e) {
-            var msg = new MessageUiForm(this.MyMsg.Text.Trim());
+            var msg = new MessageUiForm(this.MyMsg.Text.Trim(), DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text);
 
             this.MessageListBox.Items.Add(msg);
 
