@@ -73,7 +73,6 @@ namespace RuslanMessager
             return Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + CurrentDate + Properties.Resources.SaveFormatter;
         }
 
-
         public static void UpdateDayJournal(IMessage message, long ID)
         {
 
@@ -107,6 +106,8 @@ namespace RuslanMessager
             GC.Collect();
 
         }
+
+      
 
 
     }
