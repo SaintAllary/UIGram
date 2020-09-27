@@ -63,8 +63,7 @@ namespace RuslanMessager
         }
 
         public static string CreatePathToJournal(long ID, string CurrentDate)
-        {
-            MessageBox.Show(Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + CurrentDate + Properties.Resources.SaveFormatter);
+        {  
             return Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + CurrentDate + Properties.Resources.SaveFormatter;
         }
 
