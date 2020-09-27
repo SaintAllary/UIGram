@@ -30,6 +30,7 @@ namespace RuslanMessager
 
         public long CurrentChatID { get; set; }
         public DateTime LastDateToLoad { get; set; }
+        //public Message LastMSG { get; set; }
         public MainWindow() {
             InitializeComponent();
             InitializeLogic();
@@ -87,9 +88,34 @@ namespace RuslanMessager
 
             SetCurrentChatIdID(sender);
 
-            MessageListBox.Items.Clear();
+            ClearCurrentDialog();
 
             LoadChatMsgs();
+
+            UpdatePreview();
+        }
+
+        public void ClearCurrentDialog()
+        {
+            MessageListBox.Items.Clear();
+            //LastMSG = null; 
+
+        }
+        public void UpdatePreview()
+        {
+            //if (LastMSG != null)
+            //{
+            //    foreach (var item in PreviewsPanel.Children)
+            //    {
+            //        if (item is UserDialogPreviewButton && (item as UserDialogPreviewButton).ID == CurrentChatID)
+            //        {
+            //            (item as UserDialogPreviewButton).TextPreview = LastMSG.MessageText;
+            //            (item as UserDialogPreviewButton).DateTimePreviewer = DateTime.Parse(LastMSG.SendDateTime).ToShortDateString();
+
+            //        }
+            //    }
+            //}
+           
         }
 
         [Obsolete]
@@ -104,8 +130,10 @@ namespace RuslanMessager
                         SenderName = item.SenderName,
                         SendDateTime = item.SendDateTime
                     });
+                 
                 }
                 MoveChatScrollToDownEnd();
+                //LastMSG = s.Messages.Last();
 
                 //LastDateToLoad = DateTime.Parse(DateTime.Parse(s.Messages.First().SendDateTime).ToShortDateString());
             }
