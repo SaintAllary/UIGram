@@ -98,23 +98,12 @@ namespace RuslanMessager
         public void ClearCurrentDialog()
         {
             MessageListBox.Items.Clear();
-            //LastMSG = null; 
+            //LastMSG = null;
 
         }
         public void UpdatePreview()
         {
-            //if (LastMSG != null)
-            //{
-            //    foreach (var item in PreviewsPanel.Children)
-            //    {
-            //        if (item is UserDialogPreviewButton && (item as UserDialogPreviewButton).ID == CurrentChatID)
-            //        {
-            //            (item as UserDialogPreviewButton).TextPreview = LastMSG.MessageText;
-            //            (item as UserDialogPreviewButton).DateTimePreviewer = DateTime.Parse(LastMSG.SendDateTime).ToShortDateString();
-
-            //        }
-            //    }
-            //}
+           
            
         }
 
@@ -139,6 +128,12 @@ namespace RuslanMessager
             }
 
             GC.Collect();
+        }
+
+        private void UpdatePreviewInfo(Message message)
+        {
+           
+
         }
 
         private string GetLastMessagesDate() {
@@ -210,7 +205,7 @@ namespace RuslanMessager
             if (File.Exists(Properties.Resources.PreviewSavePath)) {
 
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
-                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
+                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL,TextPreview= item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime });
 
                 BumpPreviewCollection = new StackPanel();
                 //this.PreviewsChatsGrid.Children.Add(BumpPreviewCollection);
@@ -270,6 +265,7 @@ namespace RuslanMessager
 
             MoveChatScrollToDownEnd();
 
+            UpdatePreviewFull();
 
 
 
@@ -279,27 +275,86 @@ namespace RuslanMessager
 
         }
 
+
+        public void UpdatePreviewFull()
+        {
+            Message message = new Message()
+            {
+                MyTurn = true,
+                DoesRead = false,
+                SendDateTime = DateTime.Now.ToString(),
+                MessageText = this.MyMsg.Text.Trim(),
+                SenderName = this.ChatTopName_TextBlock.Text,
+                MessageContentUrl = null
+            };
+
+            XmlFunctions.UpdatePreviewByMsg(GetPreviewSerList(1, message));
+
+            foreach (var item in PreviewsPanel.Children)
+            {
+                if (item is UserDialogPreviewButton)
+                {
+                    var s = (item as UserDialogPreviewButton);
+                    if (s.ID== CurrentChatID)
+                    {
+                        s.TextPreview = message.MessageText;
+                        s.DateTimePreviewer = message.SendDateTime;
+                    }
+                }
+            }
+
+        }
+
         private void MoveChatScrollToDownEnd() {
             this.ChatScrollViewer.ScrollToEnd();
+        }
+
+
+        private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue,Message msg=null)
+        {
+            UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
+            try
+            {
+                foreach (var inneritem in this.PreviewsPanel.Children)
+                {
+                    if (inneritem is UserDialogPreviewButton)
+                    {
+                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
+                        UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName, LastMSG = new Message() { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName} };
+                        userPreviewSerializableList.userPreviewSerializables.Add(userPreviewSerializable);
+                        if (ID != long.MaxValue)
+                            userPreviewSerializable.LastMSG = msg;
+
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return userPreviewSerializableList;
+
         }
 
         private void PostSave() {
             CleanSerializableFile(Properties.Resources.PreviewSavePath);
 
-            UserPreviewSerializableList prev = new UserPreviewSerializableList();
+            UserPreviewSerializableList prev = GetPreviewSerList();
 
-            try {
-                foreach (var inneritem in this.PreviewsPanel.Children) {
-                    if (inneritem is UserDialogPreviewButton) {
-                        UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
-                        prev.userPreviewSerializables.Add(new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName });
-                    }
-                }
+            //try {
+            //    foreach (var inneritem in this.PreviewsPanel.Children) {
+            //        if (inneritem is UserDialogPreviewButton) {
+            //            UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
+            //            prev.userPreviewSerializables.Add(new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName });
+            //        }
+            //    }
 
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex) {
+            //    MessageBox.Show(ex.Message);
+            //}
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(UserPreviewSerializableList));
 
