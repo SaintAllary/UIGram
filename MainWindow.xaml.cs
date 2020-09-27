@@ -156,7 +156,6 @@ namespace RuslanMessager
             //}
 
             return DateTime.Now.ToShortDateString();
-
         }
 
         private void SetCurrentChatIdID(object sender) {
