@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
-    class Message
+    [Serializable]
+   public class Message : IMessage
     {
         /// <summary>
         /// Can contain url on any media
@@ -28,9 +29,18 @@ namespace RuslanMessager
         /// </summary>
         public bool MyTurn { get; set; }
 
+        public Message(IMessage message)
+        {
+            MessageContentUrl = message.MessageContentUrl;
+            MessageText = message.MessageText;
+            MyTurn = message.MyTurn;
+            SenderName = message.SenderName;
+            SendDateTime = message.SendDateTime;
+            DoesRead = message.DoesRead;
+
+        }
         public Message()
         {
-          
 
         }
     }

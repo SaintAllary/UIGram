@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace RuslanMessager
@@ -20,7 +21,7 @@ namespace RuslanMessager
             {
                 userPreviewSerializableList = (UserPreviewSerializableList)formatter.Deserialize(fs);
 
-              
+
             }
 
             return userPreviewSerializableList;
@@ -28,7 +29,7 @@ namespace RuslanMessager
         public static long GetBiggestId()
         {
             long current = 0;
-    
+
 
             foreach (var item in GetPreviewListInfo().userPreviewSerializables)
             {
@@ -36,13 +37,70 @@ namespace RuslanMessager
                     current = item.ID;
 
             }
-             
-              
+
+
 
 
             return current;
         }
 
-       
+        public static DayMessageJournalSerializable GetDayJournal(long chatID, string dateToFind)
+        {
+
+            DayMessageJournalSerializable userPreviewSerializableList;
+
+            XmlSerializer formatter = new XmlSerializer(typeof(DayMessageJournalSerializable));
+
+            using (FileStream fs = new FileStream(CreatePathToJournal(chatID, dateToFind), FileMode.OpenOrCreate))
+            {
+                userPreviewSerializableList = (DayMessageJournalSerializable)formatter.Deserialize(fs);
+            }
+
+            File.Delete(CreatePathToJournal(chatID,dateToFind));
+
+            return userPreviewSerializableList;
+
+        }
+
+        public static string CreatePathToJournal(long ID, string CurrentDate)
+        {
+            MessageBox.Show(Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + CurrentDate + Properties.Resources.SaveFormatter);
+            return Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + CurrentDate + Properties.Resources.SaveFormatter;
+        }
+
+
+        public static void UpdateDayJournal(IMessage message, long ID)
+        {
+
+    
+                DayMessageJournalSerializable dayMessageJournalSerializable;
+                if (File.Exists(CreatePathToJournal(ID, DateTime.Now.ToShortDateString())))
+                {
+ 
+                    dayMessageJournalSerializable = GetDayJournal(ID, DateTime.Now.ToShortDateString());
+                }
+
+                else
+                    dayMessageJournalSerializable = new DayMessageJournalSerializable();
+
+
+                dayMessageJournalSerializable.Messages.Add(new Message(message));
+
+
+                XmlSerializer formatter = new XmlSerializer(typeof(DayMessageJournalSerializable));
+
+
+                using (FileStream fs = new FileStream(CreatePathToJournal(ID,dayMessageJournalSerializable.CurrentDate), FileMode.OpenOrCreate))
+                {
+                    formatter.Serialize(fs, dayMessageJournalSerializable);
+
+
+
+                }
+
+
+        }
+
+
     }
 }
