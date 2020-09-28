@@ -31,6 +31,7 @@ namespace RuslanMessager
         public Message LastMSG { get; set; }
         public DateTime CurrentLoadedDate { get; private set; }
         public bool ChatScrollViewerVerticalOffsetZeroPointerFixer { get; private set; }
+        public bool IsAdminModeEnabled { get; private set; }
 
         public MainWindow()
         {
@@ -153,7 +154,6 @@ namespace RuslanMessager
         private DateTime LoadLastChatFile()
         {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-
 
 
             List<string> filePaths = new List<string>();
@@ -505,6 +505,7 @@ namespace RuslanMessager
         }
 
         [Obsolete]
+
         private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0))
@@ -517,6 +518,7 @@ namespace RuslanMessager
 
                         if (s != null)
                         {
+
                             int index = 0;
                             foreach (var item in s.Messages)
                             {
@@ -548,6 +550,28 @@ namespace RuslanMessager
                     else
                         ChatScrollViewerVerticalOffsetZeroPointerFixer = true;
                 }
+            }
+
+        }
+
+        private void AdminPanel_CanExec(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+        }
+
+        private void AdminPanel_Exec(object sender, ExecutedRoutedEventArgs e) {
+            if (IsAdminModeEnabled) {
+                this.AddUser.IsEnabled = true;
+                this.AddUser.Opacity = 1;
+                this.MessageListBox.IsHitTestVisible = true;
+
+                IsAdminModeEnabled = false;
+            }
+            else {
+                this.AddUser.IsEnabled = false;
+                this.AddUser.Opacity = 0;
+                this.MessageListBox.IsHitTestVisible = false;
+
+                IsAdminModeEnabled = true;
             }
 
         }

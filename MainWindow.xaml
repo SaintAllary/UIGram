@@ -18,12 +18,19 @@
         <KeyBinding Modifiers=""
                 Key="Esc"
                 Command="{x:Static SystemCommands.CloseWindowCommand}" />
+        <KeyBinding Modifiers=""
+                Key="F10"
+                Command="{x:Static SystemCommands.ShowSystemMenuCommand}" />
     </Window.InputBindings>
+    
 
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" 
                         CanExecute="CloseWindow_CanExec" 
                         Executed="CloseWindow_Exec" />
+        <CommandBinding Command="{x:Static SystemCommands.ShowSystemMenuCommand}" 
+                        CanExecute="AdminPanel_CanExec" 
+                        Executed="AdminPanel_Exec" />
     </Window.CommandBindings>
 
     <Window.Resources>
