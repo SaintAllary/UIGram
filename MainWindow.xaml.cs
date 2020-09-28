@@ -33,32 +33,31 @@ namespace RuslanMessager
         public bool ChatScrollViewerVerticalOffsetZeroPointerFixer { get; private set; }
         public bool IsAdminModeEnabled { get; private set; }
 
-        public MainWindow()
-        {
+        public MainWindow() {
             InitializeComponent();
             InitializeLogic();
+            CurrentLoadedDate = DateTime.Now;
+
+            this.AddUser.IsEnabled = false;
+            this.AddUser.Opacity = 0;
+            this.MessageListBox.IsHitTestVisible = false;           
         }
 
-        public void InitializeLogic()
-        {
-            if (!Directory.Exists(Properties.Resources.UserDataDirPath))
-            {
+        public void InitializeLogic() {
+            if (!Directory.Exists(Properties.Resources.UserDataDirPath)) {
                 Directory.CreateDirectory(Properties.Resources.UserDataDirPath);
             }
         }
 
-        private void ButtonClose_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) {
             MainWindow1.Close();
         }
 
-        private void ButtonHide_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonHide_Click(object sender, RoutedEventArgs e) {
             MainWindow1.WindowState = WindowState.Minimized;
         }
 
-        private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e) {
             if (MainWindow1.WindowState == WindowState.Maximized)
                 MainWindow1.WindowState = WindowState.Normal;
             else
@@ -66,27 +65,23 @@ namespace RuslanMessager
         }
 
 
-        private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
-        {
+        private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e) {
             DragMove();
         }
 
-        private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
+        private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
 
             if (MainWindow1.RenderSize.Width < 715)
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
             else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715)
                 ResizeColoum(3, 380, 1, GridUnitType.Star);
-            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140)
-            {
+            if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140) {
                 this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
             }
         }
 
         [Obsolete]
-        public void LoadChatFromPrev(object sender, RoutedEventArgs e)
-        {
+        public void LoadChatFromPrev(object sender, RoutedEventArgs e) {
             //SwitchChatCleaner();
             this.ChatTopName_TextBlock.Text = (sender as Button).Tag.ToString();
 
@@ -107,27 +102,21 @@ namespace RuslanMessager
         }
 
 
-        public void ClearCurrentDialog()
-        {
+        public void ClearCurrentDialog() {
             MessageListBox.Items.Clear();
             //LastMSG = null;
 
         }
-        public void UpdatePreview()
-        {
+        public void UpdatePreview() {
 
         }
 
         [Obsolete]
-        private void LoadChatMsgs()
-        {
+        private void LoadChatMsgs() {
             var s = XmlFunctions.GetDayJournal(CurrentChatID, LoadLastChatFile().ToShortDateString());
-            if (s != null)
-            {
-                foreach (var item in s.Messages)
-                {
-                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead)
-                    {
+            if (s != null) {
+                foreach (var item in s.Messages) {
+                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead) {
                         DoesRead = item.DoesRead,
                         MessageContentUrl = item.MessageContentUrl,
                         MyTurn = item.MyTurn,
@@ -145,21 +134,18 @@ namespace RuslanMessager
             GC.Collect();
         }
 
-        private void UpdatePreviewInfo(Message message)
-        {
+        private void UpdatePreviewInfo(Message message) {
 
         }
 
 
-        private DateTime LoadLastChatFile()
-        {
+        private DateTime LoadLastChatFile() {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
 
             List<string> filePaths = new List<string>();
 
-            foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID))
-            {
+            foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID)) {
                 if (item.EndsWith(Properties.Resources.SaveFormatter))
                     filePaths.Add(item);
             }
@@ -169,11 +155,9 @@ namespace RuslanMessager
                 return DateTime.Now;
 
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
-            for (int i = 0; i < filePaths.Count; i++)
-            {
+            for (int i = 0; i < filePaths.Count; i++) {
 
-                if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])))
-                {
+                if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]))) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
 
@@ -184,14 +168,12 @@ namespace RuslanMessager
         }
 
         private bool CheckDoesNameEndWithXML(string name) => name.EndsWith(Properties.Resources.SaveFormatter);
-        private string LoadPrevLastChatFile()
-        {
+        private string LoadPrevLastChatFile() {
 
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
             List<string> filePaths = new List<string>();
-            foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID))
-            {
+            foreach (var item in Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID)) {
                 if (item.EndsWith(Properties.Resources.SaveFormatter))
                     filePaths.Add(item);
             }
@@ -200,10 +182,8 @@ namespace RuslanMessager
                 return DateTime.Now.ToShortDateString();
 
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
-            for (int i = 0; i < filePaths.Count; i++)
-            {
-                if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) && DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) < CurrentLoadedDate)
-                {
+            for (int i = 0; i < filePaths.Count; i++) {
+                if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) && DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) < CurrentLoadedDate) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
             }
@@ -216,30 +196,24 @@ namespace RuslanMessager
             return PrevFilePath.ToShortDateString();
         }
 
-        private void SetCurrentChatIdID(object sender)
-        {
-            foreach (var item in PreviewsPanel.Children)
-            {
+        private void SetCurrentChatIdID(object sender) {
+            foreach (var item in PreviewsPanel.Children) {
                 if (item is UserDialogPreviewButton)
                     if ((item as UserDialogPreviewButton).Children[0] == (sender as Button))
                         CurrentChatID = (item as UserDialogPreviewButton).ID;
             }
         }
 
-        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e)
-        {
+        private void CloseWindow_CanExec(object sender, CanExecuteRoutedEventArgs e) {
             e.CanExecute = true;
         }
 
 
-        public void CreateAllDirsByID()
-        {
-            foreach (var item in PreviewsPanel.Children)
-            {
+        public void CreateAllDirsByID() {
+            foreach (var item in PreviewsPanel.Children) {
 
 
-                if (item is UserDialogPreviewButton)
-                {
+                if (item is UserDialogPreviewButton) {
                     var s = item as UserDialogPreviewButton;
                     var creatingPAth = Properties.Resources.UserDataDirPath + "\\" + s.ID;
 
@@ -249,30 +223,26 @@ namespace RuslanMessager
             }
         }
 
-        private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e)
-        {
+        private void CloseWindow_Exec(object sender, ExecutedRoutedEventArgs e) {
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
-            SwitchChatCleaner();
+            this.MessageListBox.Items.Clear();
+            //SwitchChatCleaner();
         }
 
-        private void SwitchChatCleaner()
-        {
+        private void SwitchChatCleaner() {
             LastDateToLoad = DateTime.Parse(DateTime.Now.ToShortDateString());
         }
 
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
 
-        private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType)
-        {
+        private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
             MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(1, gridUnitType);
             MainWindowGrid.ColumnDefinitions[indexPosition].MinWidth = minWidth;
         }
 
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (File.Exists(Properties.Resources.PreviewSavePath))
-            {
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
+            if (File.Exists(Properties.Resources.PreviewSavePath)) {
 
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
                     this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime });
@@ -290,16 +260,12 @@ namespace RuslanMessager
             GC.Collect();
         }
 
-        private long GetBiggestID()
-        {
+        private long GetBiggestID() {
             long tmp = 0;
-            foreach (var item in this.PreviewsPanel.Children)
-            {
+            foreach (var item in this.PreviewsPanel.Children) {
 
-                if (item is UserDialogPreviewButton)
-                {
-                    if ((item as UserDialogPreviewButton).ID > tmp)
-                    {
+                if (item is UserDialogPreviewButton) {
+                    if ((item as UserDialogPreviewButton).ID > tmp) {
                         tmp = (item as UserDialogPreviewButton).ID;
                     }
                 }
@@ -307,8 +273,7 @@ namespace RuslanMessager
             return tmp;
 
         }
-        private void AddUserButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void AddUserButton_Click(object sender, RoutedEventArgs e) {
             AddUserDialog addUserDialog = new AddUserDialog();
             addUserDialog.ShowDialog();
 
@@ -317,30 +282,25 @@ namespace RuslanMessager
 
             Directory.CreateDirectory(Properties.Resources.UserDataDirPath + "\\" + userDialogPreviewButton.ID);
 
-            if ((!File.Exists(Properties.Resources.UserDataDirPath + "\\" + userDialogPreviewButton.ID + "\\" + System.IO.Path.GetFileName(addUserDialog.CurrentPathToPict)) && File.Exists(addUserDialog.CurrentPathToPict)))
-            {
+            if ((!File.Exists(Properties.Resources.UserDataDirPath + "\\" + userDialogPreviewButton.ID + "\\" + System.IO.Path.GetFileName(addUserDialog.CurrentPathToPict)) && File.Exists(addUserDialog.CurrentPathToPict))) {
                 string destionation = Properties.Resources.UserDataDirPath + "\\" + userDialogPreviewButton.ID + "\\" + System.IO.Path.GetFileName(addUserDialog.CurrentPathToPict);
                 File.Copy(addUserDialog.CurrentPathToPict, destionation);
                 userDialogPreviewButton.PictureURL = destionation;
             }
 
-        
-            if (addUserDialog.DoexExecuted == true)
-            {
+
+            if (addUserDialog.DoexExecuted == true) {
                 PreviewsPanel.Children.Add(userDialogPreviewButton);
             }
         }
 
-        private void FastAddUserBtn_Click(object sender, RoutedEventArgs e)
-        {
+        private void FastAddUserBtn_Click(object sender, RoutedEventArgs e) {
             //PreviewsPanel.Children.Add(new UserDialogPreviewButton("TEST USER") { });
         }
 
         [Obsolete]
-        private void SendMsgBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.MyMsg.Text != "")
-            {//НЕ ПУСТОЕ СООБЩЕНИЕ
+        private void SendMsgBtn_Click(object sender, RoutedEventArgs e) {
+            if (this.MyMsg.Text != "") {//НЕ ПУСТОЕ СООБЩЕНИЕ
                 var msg = new MessageUiForm(this.MyMsg.Text.Trim(), DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text);
 
                 this.MessageListBox.Items.Add(msg);
@@ -356,10 +316,8 @@ namespace RuslanMessager
         }
 
 
-        public void UpdatePreviewFull()
-        {
-            Message message = new Message()
-            {
+        public void UpdatePreviewFull() {
+            Message message = new Message() {
                 MyTurn = true,
                 DoesRead = false,
                 SendDateTime = DateTime.Now.ToString(),
@@ -370,13 +328,10 @@ namespace RuslanMessager
 
             XmlFunctions.UpdatePreviewByMsg(GetPreviewSerList(1, message));
 
-            foreach (var item in PreviewsPanel.Children)
-            {
-                if (item is UserDialogPreviewButton)
-                {
+            foreach (var item in PreviewsPanel.Children) {
+                if (item is UserDialogPreviewButton) {
                     var s = (item as UserDialogPreviewButton);
-                    if (s.ID == CurrentChatID)
-                    {
+                    if (s.ID == CurrentChatID) {
                         s.TextPreview = message.MessageText;
                         s.DateTimePreviewer = message.SendDateTime;
                     }
@@ -385,21 +340,16 @@ namespace RuslanMessager
 
         }
 
-        private void MoveChatScrollToDownEnd()
-        {
+        private void MoveChatScrollToDownEnd() {
             this.ChatScrollViewer.ScrollToEnd();
         }
 
 
-        private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null)
-        {
+        private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
-            try
-            {
-                foreach (var inneritem in this.PreviewsPanel.Children)
-                {
-                    if (inneritem is UserDialogPreviewButton)
-                    {
+            try {
+                foreach (var inneritem in this.PreviewsPanel.Children) {
+                    if (inneritem is UserDialogPreviewButton) {
                         UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
                         UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName, LastMSG = new Message() { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName } };
                         userPreviewSerializableList.userPreviewSerializables.Add(userPreviewSerializable);
@@ -411,16 +361,14 @@ namespace RuslanMessager
                 }
 
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
             return userPreviewSerializableList;
 
         }
 
-        private void PostSave()
-        {
+        private void PostSave() {
             CleanSerializableFile(Properties.Resources.PreviewSavePath);
 
             UserPreviewSerializableList prev = GetPreviewSerList();
@@ -440,33 +388,27 @@ namespace RuslanMessager
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(UserPreviewSerializableList));
 
-            using (FileStream fs = new FileStream(Properties.Resources.PreviewSavePath, FileMode.OpenOrCreate))
-            {
+            using (FileStream fs = new FileStream(Properties.Resources.PreviewSavePath, FileMode.OpenOrCreate)) {
                 xmlSerializer.Serialize(fs, prev);
             }
 
         }
 
-        private void CleanSerializableFile(string path)
-        {
+        private void CleanSerializableFile(string path) {
             if (File.Exists(path))
                 File.Delete(path);
         }
 
-        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
 
         }
 
-        private void PostSave(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+        private void PostSave(object sender, System.ComponentModel.CancelEventArgs e) {
             PostSave();
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if ((sender as TextBox).Text == "")
-            {
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            if ((sender as TextBox).Text == "") {
                 this.LeftScrollViewer.Content = this.PreviewsPanel;
                 return;
             }
@@ -474,19 +416,15 @@ namespace RuslanMessager
             this.LeftScrollViewer.Content = BumpPreviewCollection;
 
             BumpPreviewCollection.Children.Clear();
-            foreach (var item in this.PreviewsPanel.Children)
-            {
-                if ((item as UserDialogPreviewButton).UserName.Contains((sender as TextBox).Text))
-                {
+            foreach (var item in this.PreviewsPanel.Children) {
+                if ((item as UserDialogPreviewButton).UserName.Contains((sender as TextBox).Text)) {
                     BumpPreviewCollection.Children.Add(new UserDialogPreviewButton((item as UserDialogPreviewButton).UserName) { ID = (item as UserDialogPreviewButton).ID, PhoneNumber = (item as UserDialogPreviewButton).PhoneNumber, PictureURL = (item as UserDialogPreviewButton).PictureURL });
                 }
             }
         }
 
-        private void SendMsgBtnToMe_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.MyMsg.Text != "")
-            {//НЕ ПУСТОЕ СООБЩЕНИЕ
+        private void SendMsgBtnToMe_Click(object sender, RoutedEventArgs e) {
+            if (this.MyMsg.Text != "") {//НЕ ПУСТОЕ СООБЩЕНИЕ
                 var msg = new MessageUiForm(this.MyMsg.Text.Trim(), DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, false);
 
                 this.MessageListBox.Items.Add(msg);
@@ -498,40 +436,41 @@ namespace RuslanMessager
                 XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
 
                 this.MyMsg.Text = "";
-
-
-
             }
         }
 
         [Obsolete]
 
-        private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0))
-            {
-                if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/)
-                {
-                    if (ChatScrollViewerVerticalOffsetZeroPointerFixer)
-                    {
+        private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) {
+            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {
+                if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/) {
+                    if (ChatScrollViewerVerticalOffsetZeroPointerFixer) {
                         DayMessageJournalSerializable s = XmlFunctions.GetDayJournal(CurrentChatID, LoadPrevLastChatFile());
 
-                        if (s != null)
-                        {
+                        if (s != null) {
 
                             int index = 0;
-                            foreach (var item in s.Messages)
-                            {
-                                MessageListBox.Items.Insert(index, new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead)
-                                {
+                            foreach (var item in s.Messages) {
+
+                                var tmp_msg = new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead) {
                                     DoesRead = item.DoesRead,
                                     MessageContentUrl = item.MessageContentUrl,
                                     MyTurn = item.MyTurn,
                                     SenderName = item.SenderName,
-                                    SendDateTime = item.SendDateTime,
-                                });
-                                index++;
+                                    SendDateTime = item.SendDateTime
+                                };
 
+                                bool test_first_msg = false;
+                                foreach (var i in this.MessageListBox.Items)
+                                    if ((i as MessageUiForm).SendDateTime == tmp_msg.SendDateTime)
+                                        test_first_msg = true;
+
+
+                                if (!test_first_msg) {
+                                    MessageListBox.Items.Insert(index, tmp_msg);
+                                    // MessageBox.Show($"{tmp_msg.MessageText}");
+                                }
+                                index++;
                             }
                             this.ChatScrollViewer.LineDown();
                             this.ChatScrollViewer.LineDown();
@@ -551,7 +490,6 @@ namespace RuslanMessager
                         ChatScrollViewerVerticalOffsetZeroPointerFixer = true;
                 }
             }
-
         }
 
         private void AdminPanel_CanExec(object sender, CanExecuteRoutedEventArgs e) {
