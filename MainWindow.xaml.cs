@@ -136,13 +136,20 @@ namespace RuslanMessager
         private DateTime LoadLastChatFile() {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
+            
+         
             List<string> filePaths = Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID).ToList();
+
+            if (filePaths.Count == 0)
+                return DateTime.Now;
+
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
             for (int i = 0; i < filePaths.Count; i++) {
                 if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]))) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
             }
+
 
             return PrevFilePath;//Последний день переписки.
         }
@@ -406,11 +413,9 @@ namespace RuslanMessager
 
         [Obsolete]
         private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) {
-            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {
-                //MessageBox.Show(this.ChatScrollViewer.VerticalOffset.ToString());
-                if (this.ChatScrollViewer.VerticalOffset == 0 && this.ChatScrollViewer.ScrollableHeight != 0) {
+            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {       
+                if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/) {
                     if (ChatScrollViewerVerticalOffsetZeroPointerFixer) {
-                        //MoveChatScrollToDownEnd();
                         DayMessageJournalSerializable s = XmlFunctions.GetDayJournal(CurrentChatID, LoadPrevLastChatFile());
                         
                         if (s != null) {
