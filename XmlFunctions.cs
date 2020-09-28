@@ -46,6 +46,8 @@ namespace RuslanMessager
 
         public static DayMessageJournalSerializable GetDayJournal(long chatID, string dateToFind)
         {
+            //if (dateToFind == null)
+            //    return null;
 
             DayMessageJournalSerializable userPreviewSerializableList = null;
 
