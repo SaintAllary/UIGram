@@ -31,6 +31,7 @@ namespace RuslanMessager
         public Message LastMSG { get; set; }
         public DateTime CurrentLoadedDate { get; private set; }
         public bool ChatScrollViewerVerticalOffsetZeroPointerFixer { get; private set; }
+        public bool IsAdminModeEnabled { get; private set; }
 
         public MainWindow() {
             InitializeComponent();
@@ -136,8 +137,8 @@ namespace RuslanMessager
         private DateTime LoadLastChatFile() {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
-            
-         
+
+
             List<string> filePaths = Directory.GetFiles(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID).ToList();
 
             if (filePaths.Count == 0)
@@ -413,11 +414,11 @@ namespace RuslanMessager
 
         [Obsolete]
         private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) {
-            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {       
+            if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {
                 if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/) {
                     if (ChatScrollViewerVerticalOffsetZeroPointerFixer) {
                         DayMessageJournalSerializable s = XmlFunctions.GetDayJournal(CurrentChatID, LoadPrevLastChatFile());
-                        
+
                         if (s != null) {
                             int index = 0;
                             foreach (var item in s.Messages) {
@@ -445,11 +446,32 @@ namespace RuslanMessager
 
 
                     }
-                    else 
+                    else
                         ChatScrollViewerVerticalOffsetZeroPointerFixer = true;
                 }
             }
-            
+
+        }
+
+        private void AdminPanel_CanExec(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+        }
+
+        private void AdminPanel_Exec(object sender, ExecutedRoutedEventArgs e) {
+            if (IsAdminModeEnabled) {
+                this.AddUser.IsEnabled = true;
+                this.AddUser.Opacity = 1;
+                this.MessageListBox.IsHitTestVisible = true;
+
+                IsAdminModeEnabled = false;
+            }
+            else {
+                this.AddUser.IsEnabled = false;
+                this.AddUser.Opacity = 0;
+                this.MessageListBox.IsHitTestVisible = false;
+
+                IsAdminModeEnabled = true;
+            }
         }
     }
 }
