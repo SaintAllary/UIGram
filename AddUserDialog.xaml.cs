@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace RuslanMessager
     public partial class AddUserDialog : Window
     {
         public bool DoexExecuted { get; set; }
+        public string CurrentPathToPict { get; set; }
         public AddUserDialog()
         {
             InitializeComponent();
@@ -39,6 +41,15 @@ namespace RuslanMessager
             
                 MessageBox.Show("Check your number, it must be like : 380952425161 and name less than 25 symbols","Invalid value",MessageBoxButton.OK,MessageBoxImage.Error);
             }
+        }
+
+        private void FindPicture(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image Files|*.jpg; *.jpeg; *.png";
+
+            if (openFileDialog.ShowDialog()== true)
+                CurrentPathToPict = openFileDialog.FileName;
         }
     }
 }
