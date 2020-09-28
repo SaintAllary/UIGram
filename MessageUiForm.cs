@@ -1,11 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,12 +9,12 @@ namespace RuslanMessager
 {
     public class MessageUiForm : ListBoxItem, IMessage
     {
-        FormattedText MessageTextFormatted;
-        TextBlock MessageText_TextBlock;
-        TextBlock TimeTextBlock;
-        Card msgCard;
-        PackIcon packIcon;
-        StackPanel panel;
+        private FormattedText MessageTextFormatted;
+        private TextBlock MessageText_TextBlock;
+        private TextBlock TimeTextBlock;
+        private Card msgCard;
+        private PackIcon packIcon;
+        private StackPanel panel;
         private int DateTimeBlockWidth = 36;
         private int DateTimeBlockMarginTop = -20;
         private int DateTimeBlockMarginRight = 6;
@@ -33,8 +28,6 @@ namespace RuslanMessager
             myTurn = IsMyMsg;
             msgCard = new Card();
             panel = new StackPanel();
-
-
 
             MessageText = string.Empty;
             MessageText = _messageText;
@@ -123,6 +116,7 @@ namespace RuslanMessager
         public bool DoesRead { get; set; }
 
         private bool myTurn;
+
         public bool MyTurn {
             get { return myTurn; }
             set {
@@ -130,6 +124,5 @@ namespace RuslanMessager
                 ChooseAlignment();
             }
         }
-
     }
 }

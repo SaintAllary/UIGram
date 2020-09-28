@@ -1,9 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -13,14 +10,13 @@ using System.Windows.Shapes;
 
 namespace RuslanMessager
 {
-    class UserDialogPreviewButton : StackPanel
+    internal class UserDialogPreviewButton : StackPanel
     {
         public Label NamePreviewLabel { get; set; }
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
         private Ellipse Avatar { get; set; }
-
 
         //private string imageURL;
 
@@ -37,23 +33,27 @@ namespace RuslanMessager
         //    }
         //}
 
-
         private string dateTimePreviewer;
-        public string DateTimePreviewer
-        {
+
+        public string DateTimePreviewer {
             get { return dateTimePreviewer; }
-            set { dateTimePreviewer = value;
-                if (value !=null)
-                DateTimePreviewLabel.Content =  DateTime.Parse(value).ToShortDateString() == DateTime.Now.ToShortDateString()? DateTime.Parse(value).ToShortTimeString(): DateTime.Parse(value).ToShortDateString();
+            set {
+                dateTimePreviewer = value;
+                if (value != null)
+                    DateTimePreviewLabel.Content = DateTime.Parse(value).ToShortDateString() == DateTime.Now.ToShortDateString() ? DateTime.Parse(value).ToShortTimeString() : DateTime.Parse(value).ToShortDateString();
             }
         }
+
         public double GeneralHeight { get; set; }
         private long id;
+
         public long ID {
             get { return id; }
             set { id = value; }
         }
+
         private string userName;
+
         public string UserName {
             get { return userName; }
             set {
@@ -61,56 +61,52 @@ namespace RuslanMessager
                 NamePreviewLabel.Content = value;
             }
         }
+
         private string phoneNumber;
+
         public string PhoneNumber {
             get { return phoneNumber; }
             set {
                 phoneNumber = value;
             }
         }
-   
 
         private string pictureURL;
 
-        public string PictureURL
-    {
+        public string PictureURL {
             get { return pictureURL; }
-            set { pictureURL = value;
-                if (value != null)
-                {
+            set {
+                pictureURL = value;
+                if (value != null) {
                     ImageBrush imageBrush = new ImageBrush();
-                    imageBrush.ImageSource = new BitmapImage(new Uri(value,UriKind.RelativeOrAbsolute));
+                    imageBrush.ImageSource = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute));
                     imageBrush.Stretch = Stretch.UniformToFill;
                     Avatar.Fill = imageBrush;
                 }
-                else
-                {
-                    Avatar.Fill = new SolidColorBrush(Color.FromRgb(41,58,76));
+                else {
+                    Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));
                 }
-               
             }
         }
-
 
         private string textPreview;
 
-        public string TextPreview
-        {
+        public string TextPreview {
             get { return textPreview; }
-            set { textPreview = value;
+            set {
+                textPreview = value;
                 TextPreviewLabel.Content = value;
             }
         }
-
-
 
         public UserDialogPreviewButton() {
             Height = 62;
 
             #region Main Signature of Dialog
+
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' 
+            sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
                             xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' ");
             sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}' Height ='62' />");
 
@@ -120,14 +116,17 @@ namespace RuslanMessager
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = UserName.ToString();
-            #endregion
+
+            #endregion Main Signature of Dialog
 
             #region Labels initializing
+
             //Labels
             NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13, Content = "Empty name" };
             TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, 2, 0, 0), Content = "Empty Message........" };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top, Content = "00.00.00" };
-            #endregion
+
+            #endregion Labels initializing
 
             #region Grids settings
 
@@ -138,9 +137,6 @@ namespace RuslanMessager
             Grid.SetRow(innerPanelTime, 0);
             innerPanelTime.Children.Add(DateTimePreviewLabel);
 
-
-
-
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Stretch;
             grid.VerticalAlignment = VerticalAlignment.Stretch;
@@ -149,8 +145,6 @@ namespace RuslanMessager
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
             grid.Children.Add(new Ellipse() { Fill = new SolidColorBrush(Color.FromRgb(103, 58, 183)), Margin = new System.Windows.Thickness(8) });// АВАТАРКА
-
-
 
             Grid secondGrid = new Grid();
             Grid.SetRow(TextPreviewLabel, 1);
@@ -167,33 +161,30 @@ namespace RuslanMessager
 
             grid.Children.Add(secondGrid);
 
-
-
             myButton.Content = grid;
             Children.Add(myButton);
 
+            #endregion Grids settings
 
+            #region Icon
 
-            #endregion
-
-            #region Icon    
             StatusPreviewIcon = new PackIcon();
             StatusPreviewIcon.Kind = PackIconKind.CheckAll;
             StatusPreviewIcon.VerticalAlignment = VerticalAlignment.Top;
             StatusPreviewIcon.Margin = new Thickness(0, 4, 0, 0);
             innerPanelTime.Children.Add(StatusPreviewIcon);
-            #endregion
 
+            #endregion Icon
         }
 
         public UserDialogPreviewButton(string userOutName) {
-
             Height = 62;
 
             #region Main Signature of Dialog
+
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' 
+            sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
                             xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' ");
             sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}' Height ='62'  />");
 
@@ -208,16 +199,20 @@ namespace RuslanMessager
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = userOutName.ToString();
-            #endregion
+
+            #endregion Main Signature of Dialog
 
             #region Labels initializing
+
             //Labels
             NamePreviewLabel = new Label() { FontWeight = FontWeights.Bold, Margin = new System.Windows.Thickness(0, 6, 0, 0), FontSize = 13 };
-            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"),VerticalContentAlignment= VerticalAlignment.Top, FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, -6, 0, 0), Height= 25};
+            TextPreviewLabel = new Label() { FontFamily = new FontFamily("Colibri"), VerticalContentAlignment = VerticalAlignment.Top, FontWeight = FontWeights.DemiBold, Margin = new Thickness(0, -6, 0, 0), Height = 25 };
             DateTimePreviewLabel = new Label() { VerticalAlignment = VerticalAlignment.Top };
-            #endregion
+
+            #endregion Labels initializing
 
             #region Grids settings
+
             Avatar = new Ellipse() { Margin = new Thickness(8) };
             StackPanel innerPanelTime = new StackPanel();
             innerPanelTime.FlowDirection = FlowDirection.RightToLeft;
@@ -226,9 +221,6 @@ namespace RuslanMessager
             Grid.SetRow(innerPanelTime, 0);
             innerPanelTime.Children.Add(DateTimePreviewLabel);
 
-
-
-
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Stretch;
             grid.VerticalAlignment = VerticalAlignment.Stretch;
@@ -236,11 +228,7 @@ namespace RuslanMessager
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(62) });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-
-          
             grid.Children.Add(Avatar);// АВАТАРКА
-
-
 
             Grid secondGrid = new Grid();
             Grid.SetRow(TextPreviewLabel, 1);
@@ -257,25 +245,19 @@ namespace RuslanMessager
 
             grid.Children.Add(secondGrid);
 
-
-
             myButton.Content = grid;
             Children.Add(myButton);
 
+            #endregion Grids settings
 
+            #region Icon
 
-            #endregion
-
-
-         
-
-            #region Icon    
             StatusPreviewIcon = null;
-            #endregion
+
+            #endregion Icon
 
             UserName = userOutName;
             Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));
-
         }
     }
 }

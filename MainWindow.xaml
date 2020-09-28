@@ -9,7 +9,7 @@
         Title="MainWindow" Height="626" Width="1000" SizeChanged="MainWindow1_SizeChanged"
         MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded" Closing="PostSave">
     <WindowChrome.WindowChrome>
-        <WindowChrome 
+        <WindowChrome
         CaptionHeight="0"
         ResizeBorderThickness="3" />
     </WindowChrome.WindowChrome>
@@ -22,14 +22,13 @@
                 Key="F10"
                 Command="{x:Static SystemCommands.ShowSystemMenuCommand}" />
     </Window.InputBindings>
-    
 
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" 
-                        CanExecute="CloseWindow_CanExec" 
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}"
+                        CanExecute="CloseWindow_CanExec"
                         Executed="CloseWindow_Exec" />
-        <CommandBinding Command="{x:Static SystemCommands.ShowSystemMenuCommand}" 
-                        CanExecute="AdminPanel_CanExec" 
+        <CommandBinding Command="{x:Static SystemCommands.ShowSystemMenuCommand}"
+                        CanExecute="AdminPanel_CanExec"
                         Executed="AdminPanel_Exec" />
     </Window.CommandBindings>
 
@@ -40,16 +39,16 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid x:Name="Grid">
-                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" 
-                                           Height="Auto" Fill="Transparent"/>
-                                <Border x:Name="Rectangle1" CornerRadius="2" HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Stretch" Width="Auto" Height="Auto" 
-                                        Background="{TemplateBinding Background}"/>
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"
+                                           Height="Auto" Fill="Transparent" />
+                                <Border x:Name="Rectangle1" CornerRadius="2" HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch" Width="Auto" Height="Auto"
+                                        Background="{TemplateBinding Background}" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="Tag" Value="Horizontal">
-                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto"/>
-                                    <Setter TargetName="Rectangle1" Property="Height" Value="7"/>
+                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
+                                    <Setter TargetName="Rectangle1" Property="Height" Value="7" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -59,9 +58,9 @@
 
             <!--SCROLLBARS-->
             <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-                <Setter Property="Foreground" Value="Gray"/>
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="MinWidth" Value="5" />
                 <Setter Property="Width" Value="5" />
                 <Setter Property="Template">
@@ -70,46 +69,46 @@
                             <Grid x:Name="GridRoot" Width="4" Background="{x:Null}">
                                 <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False">
                                     <Track.Thumb>
-                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
-                                               Style="{DynamicResource ScrollThumbs}"/>
+                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
+                                               Style="{DynamicResource ScrollThumbs}" />
                                     </Track.Thumb>
                                     <Track.IncreaseRepeatButton>
-                                        <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
+                                        <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False" />
                                     </Track.IncreaseRepeatButton>
                                     <Track.DecreaseRepeatButton>
-                                        <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
+                                        <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False" />
                                     </Track.DecreaseRepeatButton>
                                 </Track>
                             </Grid>
 
                             <ControlTemplate.Triggers>
                                 <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
-                                    <Setter Value="{DynamicResource ButtonSelectBrush}" 
-                                            TargetName="Thumb" Property="Background"/>
+                                    <Setter Value="{DynamicResource ButtonSelectBrush}"
+                                            TargetName="Thumb" Property="Background" />
                                 </Trigger>
                                 <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                                    <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background"/>
+                                    <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />
                                 </Trigger>
 
                                 <Trigger Property="IsEnabled" Value="false">
-                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
+                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
                                 </Trigger>
                                 <Trigger Property="Orientation" Value="Horizontal">
                                     <Setter TargetName="GridRoot" Property="LayoutTransform">
                                         <Setter.Value>
-                                            <RotateTransform Angle="-90"/>
+                                            <RotateTransform Angle="-90" />
                                         </Setter.Value>
                                     </Setter>
                                     <Setter TargetName="PART_Track" Property="LayoutTransform">
                                         <Setter.Value>
-                                            <RotateTransform Angle="-90"/>
+                                            <RotateTransform Angle="-90" />
                                         </Setter.Value>
                                     </Setter>
-                                    <Setter Property="Width" Value="Auto"/>
-                                    <Setter Property="Height" Value="12"/>
-                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal"/>
-                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand"/>
-                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand"/>
+                                    <Setter Property="Width" Value="Auto" />
+                                    <Setter Property="Height" Value="12" />
+                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -131,7 +130,7 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--<GridSplitter ResizeDirection="Columns" Grid.Column="1" Grid.Row="1" Height="Auto" Width="5" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>-->
+        <!--<GridSplitter ResizeDirection="Columns" Grid.Column="1" Grid.Row="1" Height="Auto" Width="5" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2" />-->
 
         <StackPanel>
             <Button Command="{Binding RunDialogCommand}" Width="128">RUN CODE</Button>
@@ -141,46 +140,44 @@
         <materialDesign:ColorZone Mode="Custom" Background="#f1f1f1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" MouseDown="ColorZone_MouseDown" Loaded="ColorZone_Loaded">
 
             <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                <Button Width="21" Height="21" Padding="0 0 0 -7" Click="ButtonHide_Click" Style="{DynamicResource MaterialDesignFlatButton}">
                     <materialDesign:PackIcon Kind="WindowMinimize" Foreground="#ababab" Height="21" Width="21" VerticalAlignment="Bottom" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
-                <Button Width="21" Height="21" Padding="0" Click="ButtonMaximize_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                <Button Width="21" Height="21" Padding="0" Click="ButtonMaximize_Click" Style="{DynamicResource MaterialDesignFlatButton}">
                     <materialDesign:PackIcon Kind="WindowMaximize" Foreground="#ababab" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
-                <Button Width="21" Height="21" Padding="0" Click="ButtonClose_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                <Button Width="21" Height="21" Padding="0" Click="ButtonClose_Click" Style="{DynamicResource MaterialDesignFlatButton}">
                     <materialDesign:PackIcon Kind="Close" Foreground="#ababab" Height="21" Width="21" VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
             </StackPanel>
         </materialDesign:ColorZone>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Background="#293a4c" >
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Background="#293a4c">
 
             <Button Height="62" Style="{DynamicResource MaterialDesignFlatButton}" Click="FastAddUserBtn_Click">
                 <materialDesign:PackIcon Kind="Menu" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="40" Width="24" ></materialDesign:PackIcon>
             </Button>
 
-            <Button x:Name="AllChats" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" >
-                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button x:Name="AllChats" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}">
+                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="Chat" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="28" Width="28"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
                     <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >All chats</Label>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="EditButton" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" >
-                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button x:Name="EditButton" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}">
+                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="TuneVariant" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="26" Width="26"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
                     <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Edit</Label>
                 </StackPanel>
             </Button>
 
             <Button x:Name="AddUser" Height="62" Width="72" Padding="0,8,0,0" Style="{DynamicResource MaterialDesignFlatButton}" Click="AddUserButton_Click">
-                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <StackPanel Width="72"  HorizontalAlignment="Center" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="UserAdd" Foreground="#8393a3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="28" Width="28"  HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" ></materialDesign:PackIcon>
                     <Label HorizontalContentAlignment="Center" Foreground="#8393a3" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" FontSize="11" Width="72" >Add user</Label>
                 </StackPanel>
             </Button>
-
-
         </StackPanel>
 
         <Grid x:Name="PreviewsChatsGrid" Grid.Row="1" Grid.Column="1">
@@ -198,10 +195,8 @@
                                   materialDesign:TransitionAssist.DisableTransitions="True"  FontSize="13" FontStyle="Normal"></TextBox>
             </materialDesign:Card>
 
-
             <ScrollViewer Grid.Row="1" Grid.Column="1" x:FieldModifier="public" x:Name="LeftScrollViewer">
-                <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel" x:FieldModifier="public"  >
-                    
+                <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  Name ="PreviewsPanel" x:FieldModifier="public">
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -241,7 +236,6 @@
                     </Button>
                 </materialDesign:Card>
 
-
                 <materialDesign:Card Grid.Column="2" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                     <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
@@ -260,7 +254,6 @@
                     </Button>
                 </materialDesign:Card>
 
-
                 <materialDesign:Card Grid.Column="4" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                     <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
@@ -269,11 +262,10 @@
                         <materialDesign:PackIcon Kind="DotsVertical" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
                     </Button>
                 </materialDesign:Card>
-
             </Grid>
 
             <ScrollViewer x:Name="ChatScrollViewer" Grid.Row="1" Background="Transparent" ScrollChanged="ChatScrollViewer_ScrollChanged">
-                <ListBox x:Name="MessageListBox" Background="#91a882" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="False">
+                <ListBox x:Name="MessageListBox" Background="#3d5671" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" IsHitTestVisible="False">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="IsTabStop" Value="False" />
@@ -281,11 +273,10 @@
                     </ListBox.ItemContainerStyle>
 
                     <!--<local:MessageUiForm></local:MessageUiForm>-->
-
                 </ListBox>
             </ScrollViewer>
 
-            <Grid Grid.Row="3" Height="46" >
+            <Grid Grid.Row="3" Height="46">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="46"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -311,14 +302,11 @@
                 </materialDesign:Card>
 
                 <materialDesign:Card Grid.Column="3" Height="40" Width="40"  UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" x:Name="SendBtn" HorizontalAlignment="Right" Click="SendMsgBtn_Click" Style="{DynamicResource MaterialDesignFlatButton}" >
+                    <Button Grid.Column="3" Height="40" Width="40" Padding="-10" x:Name="SendBtn" HorizontalAlignment="Right" Click="SendMsgBtn_Click" Style="{DynamicResource MaterialDesignFlatButton}">
                         <materialDesign:PackIcon Kind="Send" Foreground="#8393a3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></materialDesign:PackIcon>
                     </Button>
                 </materialDesign:Card>
-
             </Grid>
-
         </Grid>
-
     </Grid>
 </Window>
