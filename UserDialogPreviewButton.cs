@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace RuslanMessager
@@ -18,10 +19,26 @@ namespace RuslanMessager
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
         public Label DateTimePreviewLabel { get; set; }
+        private Ellipse Avatar { get; set; }
+
+
+        //private string imageURL;
+
+        //public string ImageURL
+        //{
+        //    get { return imageURL; }
+        //    set { imageURL = value;
+
+        //        //ImageBrush imageBrush = new ImageBrush();
+        //        //imageBrush.ImageSource = new BitmapImage(new Uri(value));
+        //        //imageBrush.Stretch = Stretch.UniformToFill;
+        //        //Avatar.Fill = imageBrush;
+
+        //    }
+        //}
 
 
         private string dateTimePreviewer;
-
         public string DateTimePreviewer
         {
             get { return dateTimePreviewer; }
@@ -30,7 +47,6 @@ namespace RuslanMessager
                 DateTimePreviewLabel.Content =  DateTime.Parse(value).ToShortDateString() == DateTime.Now.ToShortDateString()? DateTime.Parse(value).ToShortTimeString(): DateTime.Parse(value).ToShortDateString();
             }
         }
-
         public double GeneralHeight { get; set; }
         private long id;
         public long ID {
@@ -52,7 +68,28 @@ namespace RuslanMessager
                 phoneNumber = value;
             }
         }
-        public string PictureURL { get; set; }
+   
+
+        private string pictureURL;
+
+        public string PictureURL
+    {
+            get { return pictureURL; }
+            set { pictureURL = value;
+                if (value != null)
+                {
+                    ImageBrush imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = new BitmapImage(new Uri(value,UriKind.RelativeOrAbsolute));
+                    imageBrush.Stretch = Stretch.UniformToFill;
+                    Avatar.Fill = imageBrush;
+                }
+                else
+                {
+                    Avatar.Fill = new SolidColorBrush(Color.FromRgb(41,58,76));
+                }
+               
+            }
+        }
 
 
         private string textPreview;
@@ -181,7 +218,7 @@ namespace RuslanMessager
             #endregion
 
             #region Grids settings
-
+            Avatar = new Ellipse() { Margin = new Thickness(8) };
             StackPanel innerPanelTime = new StackPanel();
             innerPanelTime.FlowDirection = FlowDirection.RightToLeft;
             innerPanelTime.Orientation = Orientation.Horizontal;
@@ -199,7 +236,9 @@ namespace RuslanMessager
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(62) });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            grid.Children.Add(new Ellipse() { Fill = new SolidColorBrush(Color.FromRgb(103, 58, 183)), Margin = new System.Windows.Thickness(8) });// АВАТАРКА
+
+          
+            grid.Children.Add(Avatar);// АВАТАРКА
 
 
 
@@ -227,11 +266,16 @@ namespace RuslanMessager
 
             #endregion
 
+
+         
+
             #region Icon    
             StatusPreviewIcon = null;
             #endregion
 
             UserName = userOutName;
+            Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));
+
         }
     }
 }
