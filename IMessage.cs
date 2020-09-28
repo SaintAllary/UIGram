@@ -1,11 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RuslanMessager
+﻿namespace RuslanMessager
 {
     public interface IMessage
     {
@@ -13,20 +6,23 @@ namespace RuslanMessager
         /// Can contain url on any media
         /// </summary>
         string MessageContentUrl { get; set; }
+
         /// <summary>
         /// Contain full data
         /// </summary>
         string SendDateTime { get; set; }
+
         string SenderName { get; set; }
         string MessageText { get; set; }
+
         /// <summary>
         /// Show does message read
         /// </summary>
         bool DoesRead { get; set; }
+
         /// <summary>
-        /// Show 
+        /// Show
         /// </summary>
         bool MyTurn { get; set; }
-
     }
 }

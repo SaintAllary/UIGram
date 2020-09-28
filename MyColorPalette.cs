@@ -1,16 +1,10 @@
-﻿using MaterialDesignColors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace RuslanMessager
 {
-    class MyColorPalette
+    internal class MyColorPalette
     {
-        MyColorPalette() {
+        private MyColorPalette() {
             StackMenu = new SolidColorBrush(Color.FromRgb(58, 64, 71));
             Primary = new SolidColorBrush(Color.FromRgb(40, 46, 51));
             Secondary = new SolidColorBrush(Color.FromRgb(24, 25, 29));
@@ -33,6 +27,5 @@ namespace RuslanMessager
         public SolidColorBrush TextPrim;
         public SolidColorBrush TextSec;
         public SolidColorBrush CloseForm;
-
     }
 }

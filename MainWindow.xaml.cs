@@ -1,21 +1,9 @@
-﻿using MaterialDesignColors;
-using MaterialDesignThemes.Wpf;
-using RuslanMessager.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml.Serialization;
 
 namespace RuslanMessager
@@ -25,7 +13,7 @@ namespace RuslanMessager
     /// </summary>
     public partial class MainWindow : Window
     {
-        StackPanel BumpPreviewCollection { get; set; }
+        private StackPanel BumpPreviewCollection { get; set; }
         public long CurrentChatID { get; set; }
         public DateTime LastDateToLoad { get; set; }
         public Message LastMSG { get; set; }
@@ -40,7 +28,7 @@ namespace RuslanMessager
 
             this.AddUser.IsEnabled = false;
             this.AddUser.Opacity = 0;
-            this.MessageListBox.IsHitTestVisible = false;           
+            this.MessageListBox.IsHitTestVisible = false;
         }
 
         public void InitializeLogic() {
@@ -64,13 +52,11 @@ namespace RuslanMessager
                 MainWindow1.WindowState = WindowState.Maximized;
         }
 
-
         private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e) {
             DragMove();
         }
 
         private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
-
             if (MainWindow1.RenderSize.Width < 715)
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
             else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715)
@@ -101,14 +87,12 @@ namespace RuslanMessager
             CurrentLoadedDate = LoadLastChatFile();
         }
 
-
         public void ClearCurrentDialog() {
             MessageListBox.Items.Clear();
             //LastMSG = null;
-
         }
-        public void UpdatePreview() {
 
+        public void UpdatePreview() {
         }
 
         [Obsolete]
@@ -123,7 +107,6 @@ namespace RuslanMessager
                         SenderName = item.SenderName,
                         SendDateTime = item.SendDateTime,
                     });
-
                 }
                 MoveChatScrollToDownEnd();
                 //LastMSG = s.Messages.Last();
@@ -135,13 +118,10 @@ namespace RuslanMessager
         }
 
         private void UpdatePreviewInfo(Message message) {
-
         }
-
 
         private DateTime LoadLastChatFile() {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-
 
             List<string> filePaths = new List<string>();
 
@@ -150,26 +130,22 @@ namespace RuslanMessager
                     filePaths.Add(item);
             }
 
-
             if (filePaths.Count == 0)
                 return DateTime.Now;
 
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
             for (int i = 0; i < filePaths.Count; i++) {
-
                 if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]))) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
-
             }
-
 
             return PrevFilePath;//Последний день переписки.
         }
 
         private bool CheckDoesNameEndWithXML(string name) => name.EndsWith(Properties.Resources.SaveFormatter);
-        private string LoadPrevLastChatFile() {
 
+        private string LoadPrevLastChatFile() {
             DateTime lastDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
             List<string> filePaths = new List<string>();
@@ -192,7 +168,6 @@ namespace RuslanMessager
 
             CurrentLoadedDate = PrevFilePath;//Предыдущий существующий день переписки.
 
-
             return PrevFilePath.ToShortDateString();
         }
 
@@ -208,11 +183,8 @@ namespace RuslanMessager
             e.CanExecute = true;
         }
 
-
         public void CreateAllDirsByID() {
             foreach (var item in PreviewsPanel.Children) {
-
-
                 if (item is UserDialogPreviewButton) {
                     var s = item as UserDialogPreviewButton;
                     var creatingPAth = Properties.Resources.UserDataDirPath + "\\" + s.ID;
@@ -234,7 +206,8 @@ namespace RuslanMessager
             LastDateToLoad = DateTime.Parse(DateTime.Now.ToShortDateString());
         }
 
-        private void ColorZone_Loaded(object sender, RoutedEventArgs e) { }
+        private void ColorZone_Loaded(object sender, RoutedEventArgs e) {
+        }
 
         private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
             MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(1, gridUnitType);
@@ -243,7 +216,6 @@ namespace RuslanMessager
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
             if (File.Exists(Properties.Resources.PreviewSavePath)) {
-
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
                     this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime });
 
@@ -263,7 +235,6 @@ namespace RuslanMessager
         private long GetBiggestID() {
             long tmp = 0;
             foreach (var item in this.PreviewsPanel.Children) {
-
                 if (item is UserDialogPreviewButton) {
                     if ((item as UserDialogPreviewButton).ID > tmp) {
                         tmp = (item as UserDialogPreviewButton).ID;
@@ -271,12 +242,11 @@ namespace RuslanMessager
                 }
             }
             return tmp;
-
         }
+
         private void AddUserButton_Click(object sender, RoutedEventArgs e) {
             AddUserDialog addUserDialog = new AddUserDialog();
             addUserDialog.ShowDialog();
-
 
             UserDialogPreviewButton userDialogPreviewButton = new UserDialogPreviewButton(addUserDialog.NameTextBox.Text) { PhoneNumber = addUserDialog.NumberTextBox.Text, ID = GetBiggestID() + 1 };
 
@@ -287,7 +257,6 @@ namespace RuslanMessager
                 File.Copy(addUserDialog.CurrentPathToPict, destionation);
                 userDialogPreviewButton.PictureURL = destionation;
             }
-
 
             if (addUserDialog.DoexExecuted == true) {
                 PreviewsPanel.Children.Add(userDialogPreviewButton);
@@ -315,7 +284,6 @@ namespace RuslanMessager
             }
         }
 
-
         public void UpdatePreviewFull() {
             Message message = new Message() {
                 MyTurn = true,
@@ -337,13 +305,11 @@ namespace RuslanMessager
                     }
                 }
             }
-
         }
 
         private void MoveChatScrollToDownEnd() {
             this.ChatScrollViewer.ScrollToEnd();
         }
-
 
         private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
@@ -355,17 +321,13 @@ namespace RuslanMessager
                         userPreviewSerializableList.userPreviewSerializables.Add(userPreviewSerializable);
                         if (ID != long.MaxValue)
                             userPreviewSerializable.LastMSG = msg;
-
-
                     }
                 }
-
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
             return userPreviewSerializableList;
-
         }
 
         private void PostSave() {
@@ -391,7 +353,6 @@ namespace RuslanMessager
             using (FileStream fs = new FileStream(Properties.Resources.PreviewSavePath, FileMode.OpenOrCreate)) {
                 xmlSerializer.Serialize(fs, prev);
             }
-
         }
 
         private void CleanSerializableFile(string path) {
@@ -400,7 +361,6 @@ namespace RuslanMessager
         }
 
         private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-
         }
 
         private void PostSave(object sender, System.ComponentModel.CancelEventArgs e) {
@@ -440,7 +400,6 @@ namespace RuslanMessager
         }
 
         [Obsolete]
-
         private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) {
             if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {
                 if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/) {
@@ -448,10 +407,8 @@ namespace RuslanMessager
                         DayMessageJournalSerializable s = XmlFunctions.GetDayJournal(CurrentChatID, LoadPrevLastChatFile());
 
                         if (s != null) {
-
                             int index = 0;
                             foreach (var item in s.Messages) {
-
                                 var tmp_msg = new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead) {
                                     DoesRead = item.DoesRead,
                                     MessageContentUrl = item.MessageContentUrl,
@@ -464,7 +421,6 @@ namespace RuslanMessager
                                 foreach (var i in this.MessageListBox.Items)
                                     if ((i as MessageUiForm).SendDateTime == tmp_msg.SendDateTime)
                                         test_first_msg = true;
-
 
                                 if (!test_first_msg) {
                                     MessageListBox.Items.Insert(index, tmp_msg);
@@ -483,8 +439,6 @@ namespace RuslanMessager
                             ChatScrollViewerVerticalOffsetZeroPointerFixer = false;
                         }
                         //MessageBox.Show(CurrentLoadedDate.ToString());
-
-
                     }
                     else
                         ChatScrollViewerVerticalOffsetZeroPointerFixer = true;
@@ -511,7 +465,6 @@ namespace RuslanMessager
 
                 IsAdminModeEnabled = true;
             }
-
         }
     }
 }

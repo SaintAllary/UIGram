@@ -12,7 +12,6 @@ namespace RuslanMessager
             Open = new RoutedCommand("Open", typeof(TextBox));
         }
 
-
         public static RoutedCommand Open { get; set; }
     }
 }

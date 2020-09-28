@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
     [Serializable]
-    class PreviewInfoSerializable : IPreview
+    internal class PreviewInfoSerializable : IPreview
     {
         public long ID { get; set; }
         public string UserName { get; set; }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RuslanMessager
 {
-   public class UserPreviewSerializableList
+    public class UserPreviewSerializableList
     {
-      public  List<UserPreviewSerializable> userPreviewSerializables;
-        public UserPreviewSerializableList()
-        {
+        public List<UserPreviewSerializable> userPreviewSerializables;
+
+        public UserPreviewSerializableList() {
             userPreviewSerializables = new List<UserPreviewSerializable>();
         }
     }

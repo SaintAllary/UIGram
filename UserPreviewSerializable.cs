@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RuslanMessager
 {
     [Serializable]
-  public  class UserPreviewSerializable 
+    public class UserPreviewSerializable
     {
-        public UserPreviewSerializable()
-        {
+        public UserPreviewSerializable() {
             LastMSG = new Message();
         }
 
@@ -19,6 +14,5 @@ namespace RuslanMessager
         public string UserName;
         public string PictureURL;
         public string PhoneNumber;
-       
     }
 }
