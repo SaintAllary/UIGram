@@ -38,7 +38,7 @@ namespace RuslanMessager
             get { return dateTimePreviewer; }
             set {
                 dateTimePreviewer = value;
-                if (value != null)
+                if (value != null && value != DateTime.MinValue.ToString())
                     DateTimePreviewLabel.Content = DateTime.Parse(value).ToShortDateString() == DateTime.Now.ToShortDateString() ? DateTime.Parse(value).ToShortTimeString() : DateTime.Parse(value).ToShortDateString();
             }
         }

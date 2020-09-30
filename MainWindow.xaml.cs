@@ -303,6 +303,11 @@ namespace RuslanMessager
             foreach (var i in PreviewsPanel.Children)
                 userDialogPreviewButtons_Tmp.Add(i as UserDialogPreviewButton);
 
+            for (int i = 0; i < userDialogPreviewButtons_Tmp.Count; i++) {
+                if ((userDialogPreviewButtons_Tmp[i] as UserDialogPreviewButton).DateTimePreviewer == null) {
+                    (userDialogPreviewButtons_Tmp[i] as UserDialogPreviewButton).DateTimePreviewer = DateTime.MinValue.ToString();
+                }
+            }
             userDialogPreviewButtons_Tmp.Sort((x, y) => DateTime.Parse((x as UserDialogPreviewButton).DateTimePreviewer).CompareTo(DateTime.Parse((y as UserDialogPreviewButton).DateTimePreviewer)));
 
             PreviewsPanel.Children.Clear();
