@@ -64,8 +64,9 @@ namespace RuslanMessager
         private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
             if (MainWindow1.RenderSize.Width < 715)
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
-            else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715)
-                ResizeColoum(3, 380, 1, GridUnitType.Star);
+            else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715) {
+                ResizeColoum(3, 380, 2, GridUnitType.Star);
+            }
             if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140) {
                 this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
             }
@@ -220,7 +221,7 @@ namespace RuslanMessager
         }
 
         private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
-            MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(1, gridUnitType);
+            MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(value, gridUnitType);
             MainWindowGrid.ColumnDefinitions[indexPosition].MinWidth = minWidth;
         }
 

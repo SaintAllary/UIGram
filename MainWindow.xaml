@@ -123,7 +123,7 @@
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
             <ColumnDefinition Width="3" MaxWidth="3" MinWidth="3"></ColumnDefinition>
-            <ColumnDefinition MinWidth="380"></ColumnDefinition>
+            <ColumnDefinition MinWidth="380" Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="21"></RowDefinition>

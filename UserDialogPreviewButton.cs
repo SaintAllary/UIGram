@@ -201,7 +201,7 @@ namespace RuslanMessager
             myButton.Tag = userOutName.ToString();
             myButton.BorderThickness = new Thickness(0);
             myButton.BorderBrush = (Brush)Application.Current.Resources["SecondaryAccentBrush"];
-            myButton.Style = Application.Current.FindResource("MaterialDesignFlatButton") as Style;
+            myButton.Style = Application.Current.FindResource("CustomMaterialDesignFlatButton") as Style;
 
             #endregion Main Signature of Dialog
 
