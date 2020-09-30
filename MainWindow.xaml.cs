@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -226,7 +227,7 @@ namespace RuslanMessager
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
             if (File.Exists(Properties.Resources.PreviewSavePath)) {
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
-                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime });
+                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime,MyTurn = item.LastMSG.MyTurn,Icon= item.LastMSG.MyTurn?1244:3695 });
 
                 BumpPreviewCollection = new StackPanel();
                 this.BumpPreviewCollection.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -234,6 +235,7 @@ namespace RuslanMessager
                 Grid.SetColumn(BumpPreviewCollection, 1);
                 Grid.SetRow(BumpPreviewCollection, 1);
 
+       
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
                     BumpPreviewCollection.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
             }
@@ -344,7 +346,7 @@ namespace RuslanMessager
         private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
             try {
-                    //MessageBox.Show((MessageListBox.Items[MessageListBox.Items.Count-1] as MessageUiForm).MyTurn.ToString());
+                 
                 foreach (var inneritem in this.PreviewsPanel.Children) {
                     if (inneritem is UserDialogPreviewButton) {
                         UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
