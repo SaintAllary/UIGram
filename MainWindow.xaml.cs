@@ -429,6 +429,8 @@ namespace RuslanMessager
                 XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
 
                 this.MyMsg.Text = "";
+
+                SortPrevsByDate();
             }
         }
 
