@@ -88,6 +88,11 @@ namespace RuslanMessager
             (sender as Button).Background = new SolidColorBrush(Color.FromRgb(65, 159, 217));
             (sender as Button).IsHitTestVisible = false;
 
+            MessageChatLoadUiSignatureFromFile(sender);
+        }
+
+        [Obsolete]
+        private void MessageChatLoadUiSignatureFromFile(object sender) {
             CreateAllDirsByID();
 
             SetCurrentChatIdID(sender);
@@ -213,10 +218,6 @@ namespace RuslanMessager
             //SwitchChatCleaner();
         }
 
-        private void SwitchChatCleaner() {
-            LastDateToLoad = DateTime.Parse(DateTime.Now.ToShortDateString());
-        }
-
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) {
         }
 
@@ -295,6 +296,20 @@ namespace RuslanMessager
                 this.MyMsg.Text = "";
 
                 SortPrevsByDate();
+
+                //List<MessageUiForm> listMsg = new List<MessageUiForm>();
+                //foreach (var item in this.MessageListBox.Items) {
+                //    listMsg.Add(item as MessageUiForm);
+                //}
+
+                //listMsg.Sort()
+
+                //this.MessageListBox.Items.Clear();
+
+
+                //foreach (var item in this.MessageListBox.Items)
+                //    this.MessageListBox.Items.Add(item);
+
             }
         }
 
@@ -511,27 +526,38 @@ namespace RuslanMessager
             }
         }
 
+        [Obsolete]
         private void MessageListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var dialog = new EditMessageDialog();
-            MessageUiForm tmp_msg = (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm);
-            dialog.MsgTextBox.Text = tmp_msg.MessageText;
-            dialog.MsgDatePicker.SelectedDate = DateTime.Parse(tmp_msg.SendDateTime);
-            dialog.MsgTimePicker.SelectedTime = DateTime.Parse(tmp_msg.SendDateTime);
-            dialog.MyTurnToggle.IsChecked = tmp_msg.MyTurn;
-            dialog.ShowDialog();
+            if (this.MessageListBox.SelectedIndex != -1) {
+                var dialog = new EditMessageDialog();
+                MessageUiForm tmp_msg = (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm);
+                dialog.MsgTextBox.Text = tmp_msg.MessageText;
+                dialog.MsgDatePicker.SelectedDate = DateTime.Parse(tmp_msg.SendDateTime);
+                dialog.MsgTimePicker.SelectedTime = DateTime.Parse(tmp_msg.SendDateTime);
+                dialog.MyTurnToggle.IsChecked = tmp_msg.MyTurn;
+                dialog.ShowDialog();
 
-            if (dialog.DoesExecuted) {
-                var new_msg = new Message() {
-                    MyTurn = (bool)dialog.MyTurnToggle.IsChecked,
-                    MessageText = dialog.MsgTextBox.Text,
-                    SendDateTime = DateTime.Parse(dialog.MsgDatePicker.SelectedDate.ToString()).ToShortDateString() + " " + DateTime.Parse(dialog.MsgTimePicker.SelectedTime.ToString()).ToLongTimeString(),
-                    SenderName = this.ChatTopName_TextBlock.Text
-                };
-                string local_tmp_path = Properties.Resources.UserDataDirPath + "\\" + CurrentChatID + "\\" + DateTime.Parse(new_msg.SendDateTime).ToShortDateString() + Properties.Resources.SaveFormatter;
-                if (File.Exists(local_tmp_path)) {
+                if (dialog.DoesExecuted) {
+                    var new_msg = new Message() {
+                        MyTurn = (bool)dialog.MyTurnToggle.IsChecked,
+                        MessageText = dialog.MsgTextBox.Text,
+                        SendDateTime = DateTime.Parse(dialog.MsgDatePicker.SelectedDate.ToString()).ToShortDateString() + " " + DateTime.Parse(dialog.MsgTimePicker.SelectedTime.ToString()).ToLongTimeString(),
+                        SenderName = this.ChatTopName_TextBlock.Text
+                    };
+                    XmlFunctions.WriteDayJournal(new_msg, CurrentChatID, this.MessageListBox.SelectedIndex, (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm).SendDateTime);
 
+                    ClearCurrentDialog();
+
+                    LoadChatFromPrev(GetCurrentChatButtonInstance(), new RoutedEventArgs());
                 }
             }
+        }
+
+        private Button GetCurrentChatButtonInstance() {
+            foreach (var item in PreviewsPanel.Children)
+                if ((item as UserDialogPreviewButton).ID == CurrentChatID)
+                    return (item as UserDialogPreviewButton).myButton;
+            return null;
         }
     }
 }

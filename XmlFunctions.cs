@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace RuslanMessager
@@ -40,6 +42,7 @@ namespace RuslanMessager
 
                 using (FileStream fs = new FileStream(CreatePathToJournal(chatID, dateToFind), FileMode.OpenOrCreate)) {
                     userPreviewSerializableList = (DayMessageJournalSerializable)formatter.Deserialize(fs);
+                    userPreviewSerializableList.Messages.Sort((x, y) => DateTime.Parse((x.SendDateTime)).CompareTo(DateTime.Parse((y.SendDateTime))));
                 }
             }
 
@@ -69,6 +72,45 @@ namespace RuslanMessager
 
             GC.Collect();
         }
+
+        public static void WriteDayJournal(Message message, long ID, int EditedMsgIndex, string OldMsgSendTime) {
+            try {
+                string local_tmp_path = Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + DateTime.Parse(message.SendDateTime).ToShortDateString() + Properties.Resources.SaveFormatter;
+                if (File.Exists(local_tmp_path)) {
+                    DayMessageJournalSerializable new_chat_journal = XmlFunctions.GetDayJournal(ID, DateTime.Parse(message.SendDateTime).ToShortDateString());
+                    File.Delete(local_tmp_path);
+                    new_chat_journal.Messages.RemoveAt(EditedMsgIndex);
+                    new_chat_journal.Messages.Add(message);
+                    new_chat_journal.Messages.Sort((x, y) => DateTime.Parse((x.SendDateTime)).CompareTo(DateTime.Parse((y.SendDateTime))));
+                    //new_chat_journal.Messages.Reverse();
+
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(DayMessageJournalSerializable));
+                    using (FileStream fs = new FileStream(CreatePathToJournal(ID, new_chat_journal.CurrentDate), FileMode.OpenOrCreate)) {
+                        xmlSerializer.Serialize(fs, new_chat_journal);
+                    }
+                    MessageBox.Show(message.MyTurn.ToString());
+                }
+                else {
+                    DayMessageJournalSerializable new_chat_journal = new DayMessageJournalSerializable();
+                    new_chat_journal.Messages.Add(new Message(message));
+                    new_chat_journal.CurrentDate = DateTime.Parse(message.SendDateTime).ToShortDateString();
+
+                    XmlSerializer formatter = new XmlSerializer(typeof(DayMessageJournalSerializable));
+
+                    using (FileStream fs = new FileStream(CreatePathToJournal(ID, DateTime.Parse(message.SendDateTime).ToShortDateString()), FileMode.OpenOrCreate)) {
+                        formatter.Serialize(fs, new_chat_journal);
+                    }
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+
+
+            GC.Collect();
+        }
+
+
 
         public static void UpdatePreviewByMsg(UserPreviewSerializableList userPreviewSerializableList) {
             UserPreviewSerializableList uPSL = userPreviewSerializableList;
