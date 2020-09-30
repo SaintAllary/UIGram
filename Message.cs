@@ -14,7 +14,6 @@ namespace RuslanMessager
         /// Contain full data
         /// </summary>
         public string SendDateTime { get; set; }
-
         public string SenderName { get; set; }
         public string MessageText { get; set; }
 

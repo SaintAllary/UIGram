@@ -32,7 +32,7 @@ namespace RuslanMessager
             this.AddUser.IsEnabled = false;
             this.AddUser.Opacity = 0;
             this.MessageListBox.IsHitTestVisible = false;
-            
+
             SortPrevsByDate();
         }
 
@@ -228,7 +228,7 @@ namespace RuslanMessager
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
             if (File.Exists(Properties.Resources.PreviewSavePath)) {
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
-                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime,MyTurn = item.LastMSG.MyTurn,Icon= item.LastMSG.MyTurn?1244:3695 });
+                    this.PreviewsPanel.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, TextPreview = item.LastMSG.MessageText, DateTimePreviewer = item.LastMSG.SendDateTime, MyTurn = item.LastMSG.MyTurn, Icon = item.LastMSG.MyTurn ? 1244 : 3695 });
 
                 BumpPreviewCollection = new StackPanel();
                 this.BumpPreviewCollection.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -236,7 +236,7 @@ namespace RuslanMessager
                 Grid.SetColumn(BumpPreviewCollection, 1);
                 Grid.SetRow(BumpPreviewCollection, 1);
 
-       
+
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
                     BumpPreviewCollection.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
             }
@@ -318,7 +318,7 @@ namespace RuslanMessager
 
         public void UpdatePreviewFull() {
             Message message = new Message() {
-                MyTurn = MessageListBox.Items.Count > 0 ? (MessageListBox.Items[MessageListBox.Items.Count-1] as MessageUiForm).MyTurn: false,
+                MyTurn = MessageListBox.Items.Count > 0 ? (MessageListBox.Items[MessageListBox.Items.Count - 1] as MessageUiForm).MyTurn : false,
                 DoesRead = false,
                 SendDateTime = DateTime.Now.ToString(),
                 MessageText = this.MyMsg.Text.Trim(),
@@ -348,12 +348,17 @@ namespace RuslanMessager
         private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
             try {
-                 
+
                 foreach (var inneritem in this.PreviewsPanel.Children) {
                     if (inneritem is UserDialogPreviewButton) {
                         UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
-                        UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName, LastMSG = new Message()
-                        { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName,MyTurn= item.MyTurn } };
+                        UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() {
+                            ID = item.ID,
+                            PhoneNumber = item.PhoneNumber,
+                            PictureURL = item.PictureURL,
+                            UserName = item.UserName,
+                            LastMSG = new Message() { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName, MyTurn = item.MyTurn }
+                        };
                         userPreviewSerializableList.userPreviewSerializables.Add(userPreviewSerializable);
                         if (ID != long.MaxValue)
                             userPreviewSerializable.LastMSG = msg;
@@ -503,6 +508,29 @@ namespace RuslanMessager
                 this.MessageListBox.IsHitTestVisible = false;
 
                 IsAdminModeEnabled = true;
+            }
+        }
+
+        private void MessageListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var dialog = new EditMessageDialog();
+            MessageUiForm tmp_msg = (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm);
+            dialog.MsgTextBox.Text = tmp_msg.MessageText;
+            dialog.MsgDatePicker.SelectedDate = DateTime.Parse(tmp_msg.SendDateTime);
+            dialog.MsgTimePicker.SelectedTime = DateTime.Parse(tmp_msg.SendDateTime);
+            dialog.MyTurnToggle.IsChecked = tmp_msg.MyTurn;
+            dialog.ShowDialog();
+
+            if (dialog.DoesExecuted) {
+                var new_msg = new Message() {
+                    MyTurn = (bool)dialog.MyTurnToggle.IsChecked,
+                    MessageText = dialog.MsgTextBox.Text,
+                    SendDateTime = DateTime.Parse(dialog.MsgDatePicker.SelectedDate.ToString()).ToShortDateString() + " " + DateTime.Parse(dialog.MsgTimePicker.SelectedTime.ToString()).ToLongTimeString(),
+                    SenderName = this.ChatTopName_TextBlock.Text
+                };
+                string local_tmp_path = Properties.Resources.UserDataDirPath + "\\" + CurrentChatID + "\\" + DateTime.Parse(new_msg.SendDateTime).ToShortDateString() + Properties.Resources.SaveFormatter;
+                if (File.Exists(local_tmp_path)) {
+
+                }
             }
         }
     }

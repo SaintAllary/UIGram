@@ -18,6 +18,8 @@
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#333333" />
             <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#293a4c" />
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#333333" />
+            
+            <Color x:Key="PrimaryHueMidBrushColor">#939393</Color>
 
             <!--ACCENT-->
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#349fda" />
@@ -27,6 +29,14 @@
                     TargetType="{x:Type Button}">
                 <Style.Resources>
                     <Color x:Key="PrimaryHueMidBrushColor">#939393</Color>
+                    <!--<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Red" />-->
+                </Style.Resources>
+            </Style>
+            <Style x:Key="CustomExitMaterialDesignFlatButton" 
+                    BasedOn="{StaticResource MaterialDesignFlatButton}"
+                    TargetType="{x:Type Button}">
+                <Style.Resources>
+                    <Color x:Key="PrimaryHueMidBrushColor">red</Color>
                     <!--<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Red" />-->
                 </Style.Resources>
             </Style>
