@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 namespace RuslanMessager
 {
     internal class UserDialogPreviewButton : StackPanel
-    {
+    {        
         public Label NamePreviewLabel { get; set; }
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
@@ -34,7 +34,6 @@ namespace RuslanMessager
         //}
 
         private string dateTimePreviewer;
-
         public string DateTimePreviewer {
             get { return dateTimePreviewer; }
             set {
@@ -46,14 +45,12 @@ namespace RuslanMessager
 
         public double GeneralHeight { get; set; }
         private long id;
-
         public long ID {
             get { return id; }
             set { id = value; }
         }
 
         private string userName;
-
         public string UserName {
             get { return userName; }
             set {
@@ -63,7 +60,6 @@ namespace RuslanMessager
         }
 
         private string phoneNumber;
-
         public string PhoneNumber {
             get { return phoneNumber; }
             set {
@@ -72,7 +68,6 @@ namespace RuslanMessager
         }
 
         private string pictureURL;
-
         public string PictureURL {
             get { return pictureURL; }
             set {
@@ -90,7 +85,6 @@ namespace RuslanMessager
         }
 
         private string textPreview;
-
         public string TextPreview {
             get { return textPreview; }
             set {
@@ -116,6 +110,8 @@ namespace RuslanMessager
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = UserName.ToString();
+            myButton.BorderBrush = (Brush)Application.Current.Resources["SecondaryAccentBrush"];
+
 
             #endregion Main Signature of Dialog
 
@@ -179,7 +175,7 @@ namespace RuslanMessager
 
         public UserDialogPreviewButton(string userOutName) {
             Height = 62;
-
+            
             #region Main Signature of Dialog
 
             StringBuilder sb = new StringBuilder();
@@ -199,6 +195,7 @@ namespace RuslanMessager
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = userOutName.ToString();
+            myButton.BorderBrush = (Brush)Application.Current.Resources["SecondaryAccentBrush"];
 
             #endregion Main Signature of Dialog
 
@@ -257,7 +254,7 @@ namespace RuslanMessager
             #endregion Icon
 
             UserName = userOutName;
-            Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));
+            Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));            
         }
     }
 }
