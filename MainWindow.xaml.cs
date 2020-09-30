@@ -334,6 +334,7 @@ namespace RuslanMessager
                         s.TextPreview = message.MessageText;
                         s.DateTimePreviewer = message.SendDateTime;
                         s.MyTurn = message.MyTurn;
+                        s.Icon = message.MyTurn ? 1244 : 3695;
                     }
                 }
             }
