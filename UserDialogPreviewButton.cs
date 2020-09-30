@@ -18,21 +18,6 @@ namespace RuslanMessager
         public Label DateTimePreviewLabel { get; set; }
         private Ellipse Avatar { get; set; }
 
-        //private string imageURL;
-
-        //public string ImageURL
-        //{
-        //    get { return imageURL; }
-        //    set { imageURL = value;
-
-        //        //ImageBrush imageBrush = new ImageBrush();
-        //        //imageBrush.ImageSource = new BitmapImage(new Uri(value));
-        //        //imageBrush.Stretch = Stretch.UniformToFill;
-        //        //Avatar.Fill = imageBrush;
-
-        //    }
-        //}
-
         private string dateTimePreviewer;
         public string DateTimePreviewer {
             get { return dateTimePreviewer; }
@@ -94,6 +79,21 @@ namespace RuslanMessager
         }
 
         public Button myButton { get; set; }
+        private long icon;
+
+        public long Icon
+        {
+            get { return icon; }
+            set { icon = value;
+                if (value != long.MaxValue)
+                {
+                StatusPreviewIcon.Kind = (PackIconKind)value;
+
+                }
+            }
+        }
+
+        public bool MyTurn { get; set; }
 
         public UserDialogPreviewButton() {
             Height = 62;
@@ -246,6 +246,8 @@ namespace RuslanMessager
             secondGrid.Children.Add(TextPreviewLabel);
             secondGrid.Children.Add(innerPanelTime);
 
+            secondGrid.ColumnDefinitions[1].Width = new GridLength(100);
+
             grid.Children.Add(secondGrid);
 
             myButton.Content = grid;
@@ -255,7 +257,13 @@ namespace RuslanMessager
 
             #region Icon
 
-            StatusPreviewIcon = null;
+
+            StatusPreviewIcon = new PackIcon();
+            StatusPreviewIcon.Kind = PackIconKind.None;
+            StatusPreviewIcon.VerticalAlignment = VerticalAlignment.Top;
+            StatusPreviewIcon.Margin = new Thickness(0, 4, 0, 0);
+            innerPanelTime.Children.Add(StatusPreviewIcon);
+
 
             #endregion Icon
 

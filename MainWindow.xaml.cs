@@ -315,7 +315,7 @@ namespace RuslanMessager
 
         public void UpdatePreviewFull() {
             Message message = new Message() {
-                MyTurn = true,
+                MyTurn = MessageListBox.Items.Count > 0 ? (MessageListBox.Items[MessageListBox.Items.Count-1] as MessageUiForm).MyTurn: false,
                 DoesRead = false,
                 SendDateTime = DateTime.Now.ToString(),
                 MessageText = this.MyMsg.Text.Trim(),
@@ -323,7 +323,7 @@ namespace RuslanMessager
                 MessageContentUrl = null
             };
 
-            XmlFunctions.UpdatePreviewByMsg(GetPreviewSerList(1, message));
+            XmlFunctions.UpdatePreviewByMsg(GetPreviewSerList(CurrentChatID, message));
 
             foreach (var item in PreviewsPanel.Children) {
                 if (item is UserDialogPreviewButton) {
@@ -331,6 +331,7 @@ namespace RuslanMessager
                     if (s.ID == CurrentChatID) {
                         s.TextPreview = message.MessageText;
                         s.DateTimePreviewer = message.SendDateTime;
+                        s.MyTurn = message.MyTurn;
                     }
                 }
             }
@@ -343,10 +344,12 @@ namespace RuslanMessager
         private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
             try {
+                    //MessageBox.Show((MessageListBox.Items[MessageListBox.Items.Count-1] as MessageUiForm).MyTurn.ToString());
                 foreach (var inneritem in this.PreviewsPanel.Children) {
                     if (inneritem is UserDialogPreviewButton) {
                         UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
-                        UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName, LastMSG = new Message() { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName } };
+                        UserPreviewSerializable userPreviewSerializable = new UserPreviewSerializable() { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL, UserName = item.UserName, LastMSG = new Message()
+                        { SendDateTime = item.DateTimePreviewer, MessageText = item.TextPreview, MessageContentUrl = item.PictureURL, SenderName = item.UserName,MyTurn= item.MyTurn } };
                         userPreviewSerializableList.userPreviewSerializables.Add(userPreviewSerializable);
                         if (ID != long.MaxValue)
                             userPreviewSerializable.LastMSG = msg;
@@ -412,6 +415,7 @@ namespace RuslanMessager
             }
         }
 
+        [Obsolete]
         private void SendMsgBtnToMe_Click(object sender, RoutedEventArgs e) {
             if (this.MyMsg.Text != "") {//НЕ ПУСТОЕ СООБЩЕНИЕ
                 var msg = new MessageUiForm(this.MyMsg.Text.Trim(), DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, false);
