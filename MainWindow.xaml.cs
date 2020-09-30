@@ -410,6 +410,7 @@ namespace RuslanMessager
             }
         }
 
+        [Obsolete]
         private void SendMsgBtnToMe_Click(object sender, RoutedEventArgs e) {
             if (this.MyMsg.Text != "") {//НЕ ПУСТОЕ СООБЩЕНИЕ
                 var msg = new MessageUiForm(this.MyMsg.Text.Trim(), DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, false);
