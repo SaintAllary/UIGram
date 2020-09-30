@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +31,8 @@ namespace RuslanMessager
             this.AddUser.IsEnabled = false;
             this.AddUser.Opacity = 0;
             this.MessageListBox.IsHitTestVisible = false;
+            SortPrevsByDate();
+            SortPrevsByDate();
         }
 
         public void InitializeLogic() {
@@ -75,10 +78,13 @@ namespace RuslanMessager
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
 
-            foreach (var i in PreviewsPanel.Children)
+            foreach (var i in PreviewsPanel.Children) {
                 (i as UserDialogPreviewButton).myButton.Background = Brushes.White;
+                (i as UserDialogPreviewButton).myButton.IsHitTestVisible = true;
+            }
 
             (sender as Button).Background = new SolidColorBrush(Color.FromRgb(65, 159, 217));
+            (sender as Button).IsHitTestVisible = false;
 
             CreateAllDirsByID();
 
@@ -287,6 +293,21 @@ namespace RuslanMessager
                 XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
 
                 this.MyMsg.Text = "";
+
+                SortPrevsByDate();
+            }
+        }
+
+        private void SortPrevsByDate() {
+            var userDialogPreviewButtons_Tmp = new List<UserDialogPreviewButton>();
+            foreach (var i in PreviewsPanel.Children)
+                userDialogPreviewButtons_Tmp.Add(i as UserDialogPreviewButton);
+
+            userDialogPreviewButtons_Tmp.Sort((x, y) => DateTime.Parse((x as UserDialogPreviewButton).DateTimePreviewer).CompareTo(DateTime.Parse((y as UserDialogPreviewButton).DateTimePreviewer)));
+
+            PreviewsPanel.Children.Clear();
+            for (int i = userDialogPreviewButtons_Tmp.Count - 1; i >= 0; i--) {
+                PreviewsPanel.Children.Add(userDialogPreviewButtons_Tmp[i]);
             }
         }
 
