@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 namespace RuslanMessager
 {
     internal class UserDialogPreviewButton : StackPanel
-    {        
+    {
         public Label NamePreviewLabel { get; set; }
         public PackIcon StatusPreviewIcon { get; set; }
         public Label TextPreviewLabel { get; set; }
@@ -92,6 +92,8 @@ namespace RuslanMessager
                 TextPreviewLabel.Content = value;
             }
         }
+
+        public Button myButton { get; set; }
 
         public UserDialogPreviewButton() {
             Height = 62;
@@ -175,16 +177,17 @@ namespace RuslanMessager
 
         public UserDialogPreviewButton(string userOutName) {
             Height = 62;
-            
+
             #region Main Signature of Dialog
 
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+            //                xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' ");
+            ////sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}'/>");
+            //sb.Append(@"Style='{DynamicResource MaterialDesignFlatButton}'/>");
 
-            sb.Append(@"<Button xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
-                            xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' ");
-            sb.Append(@"Style='{StaticResource MaterialDesignFlatButton}' Height ='62'  />");
-
-            Button myButton = (Button)XamlReader.Parse(sb.ToString());
+            //Button myButton = (Button)XamlReader.Parse(sb.ToString());
+            myButton = new Button();
 
             foreach (var item in Application.Current.Windows) {
                 if (item.GetType() == typeof(MainWindow))
@@ -192,10 +195,13 @@ namespace RuslanMessager
             }
 
             myButton.Padding = new Thickness(0);
+            myButton.Height = 62;
             myButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = userOutName.ToString();
+            myButton.BorderThickness = new Thickness(0);
             myButton.BorderBrush = (Brush)Application.Current.Resources["SecondaryAccentBrush"];
+            myButton.Style = Application.Current.FindResource("MaterialDesignFlatButton") as Style;
 
             #endregion Main Signature of Dialog
 
@@ -254,7 +260,7 @@ namespace RuslanMessager
             #endregion Icon
 
             UserName = userOutName;
-            Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));            
+            Avatar.Fill = new SolidColorBrush(Color.FromRgb(41, 58, 76));
         }
     }
 }

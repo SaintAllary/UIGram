@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace RuslanMessager
@@ -73,6 +74,11 @@ namespace RuslanMessager
 
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
+
+            foreach (var i in PreviewsPanel.Children)
+                (i as UserDialogPreviewButton).myButton.Background = Brushes.White;
+
+            (sender as Button).Background = new SolidColorBrush(Color.FromRgb(65, 159, 217));
 
             CreateAllDirsByID();
 
