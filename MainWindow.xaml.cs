@@ -31,7 +31,7 @@ namespace RuslanMessager
             this.AddUser.IsEnabled = false;
             this.AddUser.Opacity = 0;
             this.MessageListBox.IsHitTestVisible = false;
-            SortPrevsByDate();
+            
             SortPrevsByDate();
         }
 
@@ -94,17 +94,12 @@ namespace RuslanMessager
 
             LoadChatMsgs();
 
-            UpdatePreview();
-
             CurrentLoadedDate = LoadLastChatFile();
         }
 
         public void ClearCurrentDialog() {
             MessageListBox.Items.Clear();
             //LastMSG = null;
-        }
-
-        public void UpdatePreview() {
         }
 
         [Obsolete]
@@ -151,6 +146,8 @@ namespace RuslanMessager
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
             }
+
+            SortPrevsByDate();
 
             return PrevFilePath;//Последний день переписки.
         }
