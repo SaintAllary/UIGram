@@ -93,6 +93,8 @@ namespace RuslanMessager
             }
         }
 
+        public bool MyTurn { get; set; }
+
         public UserDialogPreviewButton() {
             Height = 62;
 
