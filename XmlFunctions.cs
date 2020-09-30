@@ -88,7 +88,7 @@ namespace RuslanMessager
                     using (FileStream fs = new FileStream(CreatePathToJournal(ID, new_chat_journal.CurrentDate), FileMode.OpenOrCreate)) {
                         xmlSerializer.Serialize(fs, new_chat_journal);
                     }
-                    MessageBox.Show(message.MyTurn.ToString());
+                    //MessageBox.Show(message.MyTurn.ToString());
                 }
                 else {
                     DayMessageJournalSerializable new_chat_journal = new DayMessageJournalSerializable();
