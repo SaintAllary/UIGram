@@ -175,6 +175,7 @@ namespace RuslanMessager
             #endregion Icon
         }
 
+        [Obsolete]
         public UserDialogPreviewButton(string userOutName) {
             Height = 62;
 
