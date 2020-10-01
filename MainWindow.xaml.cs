@@ -461,7 +461,7 @@ namespace RuslanMessager
         [Obsolete]
         private void ChatScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) {
             if (this.ChatGrid.RowDefinitions[0].Height != new GridLength(0)) {
-                if (this.ChatScrollViewer.VerticalOffset == 0 /*&& this.ChatScrollViewer.ScrollableHeight != 0*/) {
+                if (this.ChatScrollViewer.VerticalOffset == 0 /*&&   this.ChatScrollViewer.ScrollableHeight != 0*/) {
                     if (ChatScrollViewerVerticalOffsetZeroPointerFixer) {
                         DayMessageJournalSerializable s = XmlFunctions.GetDayJournal(CurrentChatID, LoadPrevLastChatFile());
 
