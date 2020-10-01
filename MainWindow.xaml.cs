@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace RuslanMessager
         public DateTime CurrentLoadedDate { get; private set; }
         public bool ChatScrollViewerVerticalOffsetZeroPointerFixer { get; private set; }
         public bool IsAdminModeEnabled { get; private set; }
+        public bool IsChatSelected { get; private set; }
 
         public MainWindow() {
             InitializeComponent();
@@ -62,14 +64,42 @@ namespace RuslanMessager
         }
 
         private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e) {
-            if (MainWindow1.RenderSize.Width < 715)
+            if (IsChatSelected) {
+                UseResizeLogic_ChatPririty();
+            }
+            else {
+                UseResizeLogic_PrevPriority();
+            }
+        }
+
+        private void UseResizeLogic_ChatPririty() {
+            if (MainWindow1.RenderSize.Width < 860) {
+                ResizeColoum(3, 525, 2, GridUnitType.Star);
+                ResizeColoum(1, 0, 0, GridUnitType.Pixel);
+            }
+            else if (MainWindowGrid.ColumnDefinitions[1].MinWidth == 0 && MainWindow1.RenderSize.Width > 860) {
+                ResizeColoum(3, 525, 2, GridUnitType.Star);
+                ResizeColoum(1, 260, 1, GridUnitType.Star);
+            }
+        }
+
+        private void UseResizeLogic_PrevPriority() {
+            if (MainWindow1.RenderSize.Width < 860) {
+                ResizeColoum(1, 260, 1, GridUnitType.Star);
                 ResizeColoum(3, 0, 0, GridUnitType.Pixel);
-            else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 715) {
-                ResizeColoum(3, 380, 2, GridUnitType.Star);
+            }
+            else if (MainWindowGrid.ColumnDefinitions[3].MinWidth == 0 && MainWindow1.RenderSize.Width > 860) {
+                ResizeColoum(1, 260, 1, GridUnitType.Star);
+                ResizeColoum(3, 525, 2, GridUnitType.Star);
             }
             if (MainWindowGrid.ColumnDefinitions[3].Width.Value > 140) {
                 this.MyMsg.Width = MainWindowGrid.ColumnDefinitions[3].Width.Value - 46 * 3;
             }
+        }
+
+        private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
+            MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(value, gridUnitType);
+            MainWindowGrid.ColumnDefinitions[indexPosition].MinWidth = minWidth;
         }
 
         [Obsolete]
@@ -80,15 +110,23 @@ namespace RuslanMessager
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(54);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(46);
 
-            foreach (var i in PreviewsPanel.Children) {
-                (i as UserDialogPreviewButton).myButton.Background = Brushes.White;
-                (i as UserDialogPreviewButton).myButton.IsHitTestVisible = true;
-            }
+            CancelSelectionOnChatPrevs();
 
             (sender as Button).Background = new SolidColorBrush(Color.FromRgb(65, 159, 217));
             (sender as Button).IsHitTestVisible = false;
 
             MessageChatLoadUiSignatureFromFile(sender);
+
+            IsChatSelected = true;
+
+            UseResizeLogic_ChatPririty();
+        }
+
+        private void CancelSelectionOnChatPrevs() {
+            foreach (var i in PreviewsPanel.Children) {
+                (i as UserDialogPreviewButton).myButton.Background = Brushes.White;
+                (i as UserDialogPreviewButton).myButton.IsHitTestVisible = true;
+            }
         }
 
         [Obsolete]
@@ -114,7 +152,7 @@ namespace RuslanMessager
             var s = XmlFunctions.GetDayJournal(CurrentChatID, LoadLastChatFile().ToShortDateString());
             if (s != null) {
                 foreach (var item in s.Messages) {
-                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead) {
+                    MessageListBox.Items.Add(new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead, item.DoesRead, item.MessageContentUrl) {
                         DoesRead = item.DoesRead,
                         MessageContentUrl = item.MessageContentUrl,
                         MyTurn = item.MyTurn,
@@ -175,7 +213,7 @@ namespace RuslanMessager
 
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
             for (int i = 0; i < filePaths.Count; i++) {
-                if(PrevFilePath>=CurrentLoadedDate)
+                if (PrevFilePath >= CurrentLoadedDate)
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) && DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) < CurrentLoadedDate) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
@@ -217,15 +255,13 @@ namespace RuslanMessager
             this.ChatGrid.RowDefinitions[0].Height = new GridLength(0);
             this.ChatGrid.RowDefinitions[2].Height = new GridLength(0);
             this.MessageListBox.Items.Clear();
+            CancelSelectionOnChatPrevs();
+            if (IsChatSelected) IsChatSelected = false;
             //SwitchChatCleaner();
+            UseResizeLogic_PrevPriority();
         }
 
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) {
-        }
-
-        private void ResizeColoum(int indexPosition, double minWidth, double value, GridUnitType gridUnitType) {
-            MainWindowGrid.ColumnDefinitions[indexPosition].Width = new GridLength(value, gridUnitType);
-            MainWindowGrid.ColumnDefinitions[indexPosition].MinWidth = minWidth;
         }
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
@@ -536,6 +572,7 @@ namespace RuslanMessager
                 dialog.MsgTextBox.Text = tmp_msg.MessageText;
                 dialog.MsgDatePicker.SelectedDate = DateTime.Parse(tmp_msg.SendDateTime);
                 dialog.MsgTimePicker.SelectedTime = DateTime.Parse(tmp_msg.SendDateTime);
+                dialog.MessageContentUrl = tmp_msg.MessageContentUrl;
                 dialog.MyTurnToggle.IsChecked = tmp_msg.MyTurn;
                 dialog.ShowDialog();
 
@@ -544,7 +581,8 @@ namespace RuslanMessager
                         MyTurn = (bool)dialog.MyTurnToggle.IsChecked,
                         MessageText = dialog.MsgTextBox.Text,
                         SendDateTime = DateTime.Parse(dialog.MsgDatePicker.SelectedDate.ToString()).ToShortDateString() + " " + DateTime.Parse(dialog.MsgTimePicker.SelectedTime.ToString()).ToLongTimeString(),
-                        SenderName = this.ChatTopName_TextBlock.Text
+                        SenderName = this.ChatTopName_TextBlock.Text,
+                        MessageContentUrl = dialog.MessageContentUrl
                     };
                     XmlFunctions.WriteDayJournal(new_msg, CurrentChatID, (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm).SendDateTime);
 
@@ -560,6 +598,28 @@ namespace RuslanMessager
                 if ((item as UserDialogPreviewButton).ID == CurrentChatID)
                     return (item as UserDialogPreviewButton).myButton;
             return null;
+        }
+
+        private void SendImgMsgBtn_Click(object sender, RoutedEventArgs e) {
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter = "Image Files|*.jpg; *.jpeg; *.png";
+
+            //if (openFileDialog.ShowDialog() == true)
+            //    CurrentPathToPict = openFileDialog.FileName;
+
+            var msg = new MessageUiForm("IMAGE_CONTENT", DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, true, true, @"C:\projects github\bin\Debug\UserData\3\IMG_8597.jpg");
+
+            this.MessageListBox.Items.Add(msg);
+
+            MoveChatScrollToDownEnd();
+
+            UpdatePreviewFull();
+
+            XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
+
+            this.MyMsg.Text = "";
+
+            SortPrevsByDate();
         }
     }
 }

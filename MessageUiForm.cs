@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace RuslanMessager
 {
@@ -22,13 +24,14 @@ namespace RuslanMessager
         private int DateTimeCardPaddingRight = 36;
 
         [Obsolete]
-        public MessageUiForm(string _messageText, string _SendDateTime, string _SenderName, bool IsMyMsg = true, bool _isRead = false) : base() {
+        public MessageUiForm(string _messageText, string _SendDateTime, string _SenderName, bool IsMyMsg = true, bool _isRead = false, string image_path = "") : base() {
             packIcon = new PackIcon();
             packIcon.Foreground = Brushes.White;
             myTurn = IsMyMsg;
             msgCard = new Card();
             panel = new StackPanel();
 
+            MessageContentUrl = image_path;
             MessageText = string.Empty;
             MessageText = _messageText;
             SendDateTime = _SendDateTime;
@@ -82,6 +85,19 @@ namespace RuslanMessager
 
             if ((MessageTextFormatted.Width + 10) > 350)
                 ChangeDateTimeForLongMsg();
+
+            if (MessageContentUrl != "" && MessageContentUrl != null) {
+                ImageBrush imageBrush = new ImageBrush();
+                imageBrush.ImageSource = new BitmapImage(new Uri(MessageContentUrl, UriKind.RelativeOrAbsolute));
+                imageBrush.Stretch = Stretch.UniformToFill;
+
+                msgCard.Content = new Rectangle() { Fill = imageBrush };
+                msgCard.Padding = new Thickness(-1);
+                msgCard.Width = 430;
+                msgCard.Height = 430;
+            }
+
+            GC.Collect();
         }
 
         private void ChangeDateTimeForLongMsg() {
