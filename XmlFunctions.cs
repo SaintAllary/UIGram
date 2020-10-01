@@ -112,11 +112,6 @@ namespace RuslanMessager
                 {
                     var oldChat = GetDayJournal(ID, DateTime.Parse(OldMsgSendTime).ToShortDateString());
 
-
-                    if (oldChat.Messages.Find(x => x.SendDateTime == OldMsgSendTime) != null)
-                    {
-                        MessageBox.Show("weqwe");
-                    }
                     oldChat.Messages.Remove(oldChat.Messages.Find(x => x.SendDateTime == OldMsgSendTime));
 
                     if (File.Exists(path_to_existing_file_remove))
