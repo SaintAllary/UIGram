@@ -175,6 +175,8 @@ namespace RuslanMessager
 
             var PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[0]));
             for (int i = 0; i < filePaths.Count; i++) {
+                if(PrevFilePath>=CurrentLoadedDate)
+                    PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 if (PrevFilePath < DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) && DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i])) < CurrentLoadedDate) {
                     PrevFilePath = DateTime.Parse(System.IO.Path.GetFileNameWithoutExtension(filePaths[i]));
                 }
@@ -544,7 +546,7 @@ namespace RuslanMessager
                         SendDateTime = DateTime.Parse(dialog.MsgDatePicker.SelectedDate.ToString()).ToShortDateString() + " " + DateTime.Parse(dialog.MsgTimePicker.SelectedTime.ToString()).ToLongTimeString(),
                         SenderName = this.ChatTopName_TextBlock.Text
                     };
-                    XmlFunctions.WriteDayJournal(new_msg, CurrentChatID, this.MessageListBox.SelectedIndex, (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm).SendDateTime);
+                    XmlFunctions.WriteDayJournal(new_msg, CurrentChatID, (this.MessageListBox.Items[this.MessageListBox.SelectedIndex] as MessageUiForm).SendDateTime);
 
                     ClearCurrentDialog();
 

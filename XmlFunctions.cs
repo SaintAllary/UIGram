@@ -73,7 +73,7 @@ namespace RuslanMessager
             GC.Collect();
         }
 
-        public static void WriteDayJournal(Message message, long ID, int EditedMsgIndex, string OldMsgSendTime) {
+        public static void WriteDayJournal(Message message, long ID, string OldMsgSendTime) {
             try {
                 string local_tmp_path = Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + DateTime.Parse(message.SendDateTime).ToShortDateString() + Properties.Resources.SaveFormatter;
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(DayMessageJournalSerializable));
@@ -117,7 +117,7 @@ namespace RuslanMessager
                     if (File.Exists(path_to_existing_file_remove))
                         File.Delete(path_to_existing_file_remove);
 
-
+                    if(oldChat.Messages.Count!=0)
                     using (FileStream fs = new FileStream(CreatePathToJournal(ID, oldChat.CurrentDate), FileMode.OpenOrCreate))
                     {
                         xmlSerializer.Serialize(fs, oldChat);
@@ -134,8 +134,6 @@ namespace RuslanMessager
             GC.Collect();
         }
 
-
-
         public static void UpdatePreviewByMsg(UserPreviewSerializableList userPreviewSerializableList) {
             UserPreviewSerializableList uPSL = userPreviewSerializableList;
 
@@ -148,6 +146,7 @@ namespace RuslanMessager
                 formatter.Serialize(fs, uPSL);
             }
         }
+
 
         //public static UserPreviewSerializable GetPreviewListInfo(long ID)
         //{
