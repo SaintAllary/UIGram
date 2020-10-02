@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:RuslanMessager"
         mc:Ignorable="d"
         Title="MainWindow" Height="626" Width="1000" SizeChanged="MainWindow1_SizeChanged"
-        MinWidth="501" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded" Closing="PostSave">
+        MinWidth="597" MinHeight="452" Background="White" AllowsTransparency="True" WindowStyle="None" Loaded="MainWindow1_Loaded" Closing="PostSave">
     <WindowChrome.WindowChrome>
         <WindowChrome
         CaptionHeight="0"
@@ -123,7 +123,7 @@
             <ColumnDefinition Width="72"></ColumnDefinition>
             <ColumnDefinition MinWidth="260"></ColumnDefinition>
             <ColumnDefinition Width="3" MaxWidth="3" MinWidth="3"></ColumnDefinition>
-            <ColumnDefinition MinWidth="380" Width="2*"></ColumnDefinition>
+            <ColumnDefinition MinWidth="525" Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="21"></RowDefinition>
@@ -285,7 +285,7 @@
                 </Grid.ColumnDefinitions>
 
                 <materialDesign:Card Grid.Column="0" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
+                    <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" Click="SendImgMsgBtn_Click" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
                             <RotateTransform Angle="135" />
                         </Button.RenderTransform>

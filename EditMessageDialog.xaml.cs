@@ -21,6 +21,8 @@ namespace RuslanMessager
     {
         public bool DoesExecuted { get; set; }
 
+        public string MessageContentUrl { get; set; }
+
         public EditMessageDialog() {
             InitializeComponent();
         }
