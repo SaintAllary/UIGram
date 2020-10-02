@@ -506,7 +506,7 @@ namespace RuslanMessager
                         if (s != null) {
                             int index = 0;
                             foreach (var item in s.Messages) {
-                                var tmp_msg = new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead) {
+                                var tmp_msg = new MessageUiForm(item.MessageText, item.SendDateTime, item.SenderName, item.DoesRead, item.DoesRead, item.MessageContentUrl) {
                                     DoesRead = item.DoesRead,
                                     MessageContentUrl = item.MessageContentUrl,
                                     MyTurn = item.MyTurn,
