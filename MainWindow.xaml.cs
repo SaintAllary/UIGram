@@ -601,25 +601,38 @@ namespace RuslanMessager
         }
 
         private void SendImgMsgBtn_Click(object sender, RoutedEventArgs e) {
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Filter = "Image Files|*.jpg; *.jpeg; *.png";
+            string CurrentPathToPict = "";
 
-            //if (openFileDialog.ShowDialog() == true)
-            //    CurrentPathToPict = openFileDialog.FileName;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg; *.jpeg; *.png";
 
-            var msg = new MessageUiForm("IMAGE_CONTENT", DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, true, true, @"C:\projects github\bin\Debug\UserData\3\IMG_8597.jpg");
+            if (openFileDialog.ShowDialog() == true)
+                CurrentPathToPict = openFileDialog.FileName;
 
-            this.MessageListBox.Items.Add(msg);
+            Directory.CreateDirectory(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID);
 
-            MoveChatScrollToDownEnd();
+            if ((!File.Exists(Properties.Resources.UserDataDirPath + "\\" + CurrentChatID + "\\" + System.IO.Path.GetFileName(openFileDialog.FileName)) && File.Exists(openFileDialog.FileName))) {
+                string destionation = Properties.Resources.UserDataDirPath + "\\" + CurrentChatID + "\\" + System.IO.Path.GetFileName(openFileDialog.FileName);
+                File.Copy(openFileDialog.FileName, destionation);
 
-            UpdatePreviewFull();
+                #region MessageInUi
 
-            XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
+                var msg = new MessageUiForm("IMAGE_CONTENT", DateTime.Now.ToString(), this.ChatTopName_TextBlock.Text, true, true, destionation);
 
-            this.MyMsg.Text = "";
+                this.MessageListBox.Items.Add(msg);
 
-            SortPrevsByDate();
+                MoveChatScrollToDownEnd();
+
+                UpdatePreviewFull();
+
+                XmlFunctions.UpdateDayJournal(msg, CurrentChatID);
+
+                this.MyMsg.Text = "";
+
+                SortPrevsByDate();
+
+                #endregion
+            }            
         }
     }
 }
