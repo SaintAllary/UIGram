@@ -1,9 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -264,6 +262,7 @@ namespace RuslanMessager
         private void ColorZone_Loaded(object sender, RoutedEventArgs e) {
         }
 
+        [Obsolete]
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e) {
             if (File.Exists(Properties.Resources.PreviewSavePath)) {
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
@@ -274,7 +273,6 @@ namespace RuslanMessager
                 this.BumpPreviewCollection.VerticalAlignment = VerticalAlignment.Stretch;
                 Grid.SetColumn(BumpPreviewCollection, 1);
                 Grid.SetRow(BumpPreviewCollection, 1);
-
 
                 foreach (var item in XmlFunctions.GetPreviewListInfo().userPreviewSerializables)
                     BumpPreviewCollection.Children.Add(new UserDialogPreviewButton(item.UserName) { ID = item.ID, PhoneNumber = item.PhoneNumber, PictureURL = item.PictureURL });
@@ -295,6 +293,7 @@ namespace RuslanMessager
             return tmp;
         }
 
+        [Obsolete]
         private void AddUserButton_Click(object sender, RoutedEventArgs e) {
             AddUserDialog addUserDialog = new AddUserDialog();
             addUserDialog.ShowDialog();
@@ -344,10 +343,8 @@ namespace RuslanMessager
 
                 //this.MessageListBox.Items.Clear();
 
-
                 //foreach (var item in this.MessageListBox.Items)
                 //    this.MessageListBox.Items.Add(item);
-
             }
         }
 
@@ -401,7 +398,6 @@ namespace RuslanMessager
         private UserPreviewSerializableList GetPreviewSerList(long ID = long.MaxValue, Message msg = null) {
             UserPreviewSerializableList userPreviewSerializableList = new UserPreviewSerializableList();
             try {
-
                 foreach (var inneritem in this.PreviewsPanel.Children) {
                     if (inneritem is UserDialogPreviewButton) {
                         UserDialogPreviewButton item = inneritem as UserDialogPreviewButton;
@@ -461,6 +457,7 @@ namespace RuslanMessager
             PostSave();
         }
 
+        [Obsolete]
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             if ((sender as TextBox).Text == "") {
                 this.LeftScrollViewer.Content = this.PreviewsPanel;
@@ -600,6 +597,7 @@ namespace RuslanMessager
             return null;
         }
 
+        [Obsolete]
         private void SendImgMsgBtn_Click(object sender, RoutedEventArgs e) {
             string CurrentPathToPict = "";
 
@@ -631,8 +629,8 @@ namespace RuslanMessager
 
                 SortPrevsByDate();
 
-                #endregion
-            }            
+                #endregion MessageInUi
+            }
         }
     }
 }

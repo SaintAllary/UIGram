@@ -10,17 +10,14 @@
         MinWidth="400" MinHeight="200">
     <Grid Background="White" MouseDown="ColorZone_MouseDown">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="271*"/>
-            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="271*" />
+            <ColumnDefinition Width="122*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-
-
-
 
         <DatePicker x:Name="MsgDatePicker" x:FieldModifier="public" Width="170" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left"></DatePicker>
         <materialDesign:TimePicker x:Name="MsgTimePicker" x:FieldModifier="public" Width="170" Margin="10" WithSeconds="True" VerticalAlignment="Top" HorizontalAlignment="Right" Is24Hours="True" Grid.ColumnSpan="2" />
@@ -30,7 +27,7 @@
         <materialDesign:Card Grid.Row="2" Width="150" HorizontalAlignment="Left" UniformCornerRadius="10" Margin="5" Padding="0 -5 0 -5" materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontFamily="Calibri" FontSize="16" VerticalAlignment="Center" Margin="10">My message</TextBlock>
-                <ToggleButton x:Name="MyTurnToggle" Margin="0 1 0 0" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton" IsChecked="True"/>
+                <ToggleButton x:Name="MyTurnToggle" Margin="0 1 0 0" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton" IsChecked="True" />
             </StackPanel>
         </materialDesign:Card>
 
@@ -38,6 +35,5 @@
             <Button  Style="{DynamicResource CustomMaterialDesignFlatButton}" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Cancel" Click="Button_Click_Cancel"></Button>
             <Button  Margin="5" HorizontalAlignment="Right" Foreground="White" VerticalAlignment="Bottom" Content="Save" Click="Button_Click_Save"></Button>
         </StackPanel>
-
     </Grid>
 </Window>

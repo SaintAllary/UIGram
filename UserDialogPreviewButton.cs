@@ -19,6 +19,7 @@ namespace RuslanMessager
         private Ellipse Avatar { get; set; }
 
         private string dateTimePreviewer;
+
         public string DateTimePreviewer {
             get { return dateTimePreviewer; }
             set {
@@ -30,12 +31,14 @@ namespace RuslanMessager
 
         public double GeneralHeight { get; set; }
         private long id;
+
         public long ID {
             get { return id; }
             set { id = value; }
         }
 
         private string userName;
+
         public string UserName {
             get { return userName; }
             set {
@@ -45,6 +48,7 @@ namespace RuslanMessager
         }
 
         private string phoneNumber;
+
         public string PhoneNumber {
             get { return phoneNumber; }
             set {
@@ -53,6 +57,7 @@ namespace RuslanMessager
         }
 
         private string pictureURL;
+
         public string PictureURL {
             get { return pictureURL; }
             set {
@@ -70,6 +75,7 @@ namespace RuslanMessager
         }
 
         private string textPreview;
+
         public string TextPreview {
             get { return textPreview; }
             set {
@@ -81,14 +87,12 @@ namespace RuslanMessager
         public Button myButton { get; set; }
         private long icon;
 
-        public long Icon
-        {
+        public long Icon {
             get { return icon; }
-            set { icon = value;
-                if (value != long.MaxValue)
-                {
-                StatusPreviewIcon.Kind = (PackIconKind)value;
-
+            set {
+                icon = value;
+                if (value != long.MaxValue) {
+                    StatusPreviewIcon.Kind = (PackIconKind)value;
                 }
             }
         }
@@ -113,7 +117,6 @@ namespace RuslanMessager
             myButton.VerticalContentAlignment = VerticalAlignment.Stretch;
             myButton.Tag = UserName.ToString();
             myButton.BorderBrush = (Brush)Application.Current.Resources["SecondaryAccentBrush"];
-
 
             #endregion Main Signature of Dialog
 
@@ -258,13 +261,11 @@ namespace RuslanMessager
 
             #region Icon
 
-
             StatusPreviewIcon = new PackIcon();
             StatusPreviewIcon.Kind = PackIconKind.None;
             StatusPreviewIcon.VerticalAlignment = VerticalAlignment.Top;
             StatusPreviewIcon.Margin = new Thickness(0, 4, 0, 0);
             innerPanelTime.Children.Add(StatusPreviewIcon);
-
 
             #endregion Icon
 

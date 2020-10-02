@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Xml.Serialization;
 
@@ -79,21 +78,23 @@ namespace RuslanMessager
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(DayMessageJournalSerializable));
 
                 //MessageBox.Show($"OLD SEND DATE TIME {OldMsgSendTime}\n NEW DATE TIME {message.SendDateTime}");
-                string path_to_existing_file_remove = Properties.Resources.UserDataDirPath+"\\"+ID+"\\" +DateTime.Parse(OldMsgSendTime).ToShortDateString() + Properties.Resources.SaveFormatter;
+                string path_to_existing_file_remove = Properties.Resources.UserDataDirPath + "\\" + ID + "\\" + DateTime.Parse(OldMsgSendTime).ToShortDateString() + Properties.Resources.SaveFormatter;
                 if (File.Exists(local_tmp_path)) {
+
                     #region Creating and editing new journal
+
                     DayMessageJournalSerializable new_chat_journal = XmlFunctions.GetDayJournal(ID, DateTime.Parse(message.SendDateTime).ToShortDateString());
                     File.Delete(local_tmp_path);
                     new_chat_journal.Messages.Add(message);
                     new_chat_journal.Messages.Sort((x, y) => DateTime.Parse((x.SendDateTime)).CompareTo(DateTime.Parse((y.SendDateTime))));
                     //new_chat_journal.Messages.Reverse();
-                 
+
                     using (FileStream fs = new FileStream(CreatePathToJournal(ID, new_chat_journal.CurrentDate), FileMode.OpenOrCreate)) {
                         xmlSerializer.Serialize(fs, new_chat_journal);
                     }
                     //MessageBox.Show(message.MyTurn.ToString());
-                    #endregion
 
+                    #endregion Creating and editing new journal
                 }
                 else {
                     DayMessageJournalSerializable new_chat_journal = new DayMessageJournalSerializable();
@@ -108,8 +109,8 @@ namespace RuslanMessager
                 }
 
                 #region Editing old journal
-                if (File.Exists(path_to_existing_file_remove))
-                {
+
+                if (File.Exists(path_to_existing_file_remove)) {
                     var oldChat = GetDayJournal(ID, DateTime.Parse(OldMsgSendTime).ToShortDateString());
 
                     oldChat.Messages.Remove(oldChat.Messages.Find(x => x.SendDateTime == OldMsgSendTime));
@@ -117,19 +118,17 @@ namespace RuslanMessager
                     if (File.Exists(path_to_existing_file_remove))
                         File.Delete(path_to_existing_file_remove);
 
-                    if(oldChat.Messages.Count!=0)
-                    using (FileStream fs = new FileStream(CreatePathToJournal(ID, oldChat.CurrentDate), FileMode.OpenOrCreate))
-                    {
-                        xmlSerializer.Serialize(fs, oldChat);
-                    }
+                    if (oldChat.Messages.Count != 0)
+                        using (FileStream fs = new FileStream(CreatePathToJournal(ID, oldChat.CurrentDate), FileMode.OpenOrCreate)) {
+                            xmlSerializer.Serialize(fs, oldChat);
+                        }
                 }
 
-                #endregion
+                #endregion Editing old journal
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
-
 
             GC.Collect();
         }
@@ -146,7 +145,6 @@ namespace RuslanMessager
                 formatter.Serialize(fs, uPSL);
             }
         }
-
 
         //public static UserPreviewSerializable GetPreviewListInfo(long ID)
         //{
