@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChangeUserDataDialog.xaml.cs">
+      <DependentUpon>ChangeUserDataDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DayMessageJournalSerializable.cs" />
     <Compile Include="EditMessageDialog.xaml.cs">
       <DependentUpon>EditMessageDialog.xaml</DependentUpon>
@@ -81,6 +84,10 @@
     <Compile Include="UserPreviewSerializableList.cs" />
     <Compile Include="XmlFunctions.cs" />
     <Compile Include="WindowCommands.cs" />
+    <Page Include="ChangeUserDataDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

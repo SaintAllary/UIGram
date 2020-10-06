@@ -255,7 +255,7 @@
                 </materialDesign:Card>
 
                 <materialDesign:Card Grid.Column="4" Height="40" Width="40" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                    <Button Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5">
+                    <Button IsEnabled="False" x:Name="DotsAdminChange" Grid.Column="0" Height="40" Width="40" Padding="-10" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" RenderTransformOrigin="0.5,0.5" Click="ChangeUserData">
                         <Button.RenderTransform>
                             <RotateTransform Angle="0" />
                         </Button.RenderTransform>
