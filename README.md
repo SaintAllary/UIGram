@@ -13,9 +13,9 @@
 -Switch side of sending</br>
 
 
-#C# #WPF #XAML #Mateterial Design
+#C# #WPF #XAML #Mateterial Design #Team Project</br>
 .NET 4.8 > </br>
-[If you see difference between your telegram's UI and this, that's OK, because on difference platforms and settings it can be little bit different]
+[If you see difference between your telegram's UI and this, that's OK, because on difference platforms and settings it can be little bit different] </br>
 
 Interface using:</br>
 -Same as in telegram</br>
@@ -33,3 +33,4 @@ Basic mode:</br>
 -Send messages</br>
 
 
+![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/first.jpg)
