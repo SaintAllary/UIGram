@@ -8,6 +8,8 @@
 -Information must reload all the time</br>
 -In admin panel you can move messages (in time) and they must move be moved in UI too</br>
 -Information must load by parts (not all messages from all chats when you open)</br>
+-Absolutly same adaptive as in telegram
+-Perfect pixel
 
 #C# #WPF #XAML #Mateterial Design
 .NET 4.8 > </br>
@@ -22,5 +24,6 @@ Interface using:</br>
 -Add new users </br>
 -Edit users</br>
 -Edit any messages*</br>
--Edit any load photos</br>
+-Edit any loaded photos</br>
+
 
