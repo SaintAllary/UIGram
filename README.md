@@ -34,3 +34,8 @@ Basic mode:</br>
 
 
 ![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/first.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/second.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/third.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/fourth.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/fiveth.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/SUPERLAST/ImagesGit/sixth.jpg)
