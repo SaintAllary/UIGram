@@ -10,6 +10,8 @@
 -Information must load by parts (not all messages from all chats when you open)</br>
 -Absolutely same adaptive as in telegram</br>
 -Perfect pixel</br>
+-Switch side of sending</br>
+
 
 #C# #WPF #XAML #Mateterial Design
 .NET 4.8 > </br>
@@ -25,7 +27,8 @@ Interface using:</br>
 -Add new users </br>
 -Edit users</br>
 -Edit any messages</br>
--Edit any loaded photos*</br>
+-Edit any loaded photos</br>
+-Switch side of sending*</br>
 Basic mode:</br>
 -Send messages</br>
 
