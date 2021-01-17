@@ -33,4 +33,4 @@ Basic mode:</br>
 -Send messages</br>
 
 
-![Image alt](https://github.com/SaintAllary/SQLQueryGenerator/raw/main/Images/first.jpg)
+![Image alt](https://github.com/SaintAllary/UIGram/raw/master/ImagesGit/first.jpg)
