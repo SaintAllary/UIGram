@@ -1,7 +1,7 @@
 # UIGram
 
 [Ordered Commercial] </br>
-</br>Task:</br>-
+</br>Task:</br>
 -Create UI clone of the telegram</br>
 -Without using any kind of databases.</br>
 -All information must be in local storage</br>
